@@ -1,9 +1,10 @@
+
 export const SITE = {
   website: "https://alexanderjtaylor.com/", // replace this with your deployed domain
   author: "Alexander J. Taylor",
   profile: "https://alexanderjtaylor.com/",
   desc: "Everything, Everywhere, All at Once.",
-  title: ".",
+  title: "Alexander J. Taylor",
   ogImage: "ajt-headtest.svg",
   lightAndDarkMode: false,
   postPerIndex: 4,
