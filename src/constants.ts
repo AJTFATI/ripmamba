@@ -30,12 +30,6 @@ export const SOCIALS: Social[] = [
     icon: IconBrandX,
   },
   {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/username/",
-    linkTitle: `${SITE.title} on LinkedIn`,
-    icon: IconLinkedin,
-  },
-  {
     name: "Mail",
     href: "mailto:contact@alexanderjtaylor.com",
     linkTitle: `Send an email to ${SITE.title}`,
@@ -44,18 +38,6 @@ export const SOCIALS: Social[] = [
 ] as const;
 
 export const SHARE_LINKS: Social[] = [
-  {
-    name: "WhatsApp",
-    href: "https://wa.me/?text=",
-    linkTitle: `Share this post via WhatsApp`,
-    icon: IconWhatsapp,
-  },
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/sharer.php?u=",
-    linkTitle: `Share this post on Facebook`,
-    icon: IconFacebook,
-  },
   {
     name: "Mail",
     href: "mailto:?subject=See%20this%20post&body=",
