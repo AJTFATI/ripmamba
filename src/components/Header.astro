@@ -6,7 +6,7 @@ import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
-import HeaderTest from "@/images/ajt-headtest.svg";
+import HeaderTest from "@/assets/icons/ajt-headtest.svg";
 import { SITE } from "@/config";
 
 const { pathname } = Astro.url;
@@ -44,11 +44,12 @@ const isActive = (path: string) => {
     ]}
   >
     <a
-      href="/"
-      class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
-    >
-      <ajt-headtest class="h-8 w-auto" />
-    </a>
+       href="/"
+  class="absolute py-1 whitespace-nowrap sm:static sm:my-auto"
+  aria-label={SITE.title}
+>
+  <HeaderTest class="h-10 w-auto" />
+</a>
     <nav
       id="nav-menu"
       class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
