@@ -4,20 +4,12 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root,
-html[data-theme="light"] {
-  --background: #4B4237;
-  --foreground: #009B3A;
-  --accent: #D5A021;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
-}
-
-html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60;
-  --border: #ab4b08;
+:root {
+  --background: #020008;
+  --foreground: #dad5d3;
+  --accent: #cd9541;
+  --muted: #532617;
+  --border: rgba(218, 213, 211, 0.15);
 }
 
 @theme inline {
