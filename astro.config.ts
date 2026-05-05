@@ -61,8 +61,8 @@ export default defineConfig({
     preserveScriptOrder: true,
     fonts: [
       {
-        name: " EB Garamond",
-        cssVariable: "--font-eb-garamond",
+        name: "Newsreader",
+        cssVariable: "--font-newsreader",
         provider: fontProviders.google(),
         fallbacks: ["monospace"],
         weights: [300, 400, 500, 600, 700],

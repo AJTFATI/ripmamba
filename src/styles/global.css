@@ -6,14 +6,19 @@
 :root,
 :root {
   --background: #020008;
-  --foreground: #dad5d3;
-  --accent: #532617;
-  --muted: #cd9541;
-  --border: rgba(218, 213, 211, 0.15);
+  --foreground: ##e8e3e1;
+  --accent: #cd9541;
+  --muted: #532617;
+  --border:rgba(218, 213, 211, 0.15);
+h1, h2 {
+  color: #cd9541;
 }
 
+h3, h4 {
+  color: #f2eeec;
+}
 @theme inline {
-  --font-app: var(--font-eb-garamond);
+  --font-app: var(--font-newsreader);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
