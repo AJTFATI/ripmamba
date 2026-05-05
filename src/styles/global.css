@@ -3,13 +3,14 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-:root,
 :root {
   --background: #020008;
-  --foreground: ##e8e3e1;
+  --foreground: #e8e3e1;
   --accent: #cd9541;
   --muted: #532617;
-  --border:rgba(218, 213, 211, 0.15);
+  --border: #dad5d326;
+}
+
 h1, h2 {
   color: #cd9541;
 }
@@ -17,6 +18,7 @@ h1, h2 {
 h3, h4 {
   color: #f2eeec;
 }
+
 @theme inline {
   --font-app: var(--font-newsreader);
   --color-background: var(--background);
@@ -60,8 +62,6 @@ h3, h4 {
   @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
 
-/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
-/* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 1rem;
 }
