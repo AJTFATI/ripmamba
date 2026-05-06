@@ -61,8 +61,6 @@ env: {
     },
   },
   experimental: {
-    fonts: [
-      {
         name: "Newsreader",
         cssVariable: "--font-newsreader",
         provider: fontProviders.google(),
