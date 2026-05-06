@@ -2,8 +2,7 @@ import type { ImageMetadata } from "astro";
 import mistborn from "@/assets/posters/mistborn-thefinalempire.jpg";
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import wellofascension from "@/assets/posters/wellofascension.jpg";
-import heroofages-mistborn3 from "@assets/posters/wellofascension.jpg"
-
+import heroofages from "@/assets/posters/heroofages-mistborn3.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -36,13 +35,13 @@ export const books: Book[] = [
     rating: 5,
     tags: ["fantasy"],
   },
-  {
-    title: "The Hero Of Ages",
-    author: "Brandon Sanderson",
-    cover: "heroofages-mistborn3",
-    rating: 5,
-    tags: ["fantasy"],
-  },
+{
+  title: "Mistborn: The Hero of Ages",
+  author: "Brandon Sanderson",
+  cover: heroofages,
+  rating: 5,
+  tags: ["fantasy"],
+},
 ];
 
 export const films: Film[] = [
