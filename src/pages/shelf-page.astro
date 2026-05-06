@@ -1,15 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Shelf from "../components/Shelf.astro";
-import { books, films } from "../data/shelf";
+import Main from "@/layouts/Main.astro";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Shelf from "@/components/Shelf.astro";
+import { books, films } from "@/data/shelf";
 ---
 
 <Layout title="Shelf — 2025" description="Books and films I consumed in 2025.">
-  <main class="app-layout py-8">
+  <Header />
+  <Main>
     <h1>Shelf</h1>
     <p class="shelf-intro">Everything I read and watched in 2025.</p>
     <Shelf books={books} films={films} />
-  </main>
+  </Main>
+  <Footer />
 </Layout>
 
 <style>
