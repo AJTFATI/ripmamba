@@ -20,7 +20,7 @@ export default defineConfig({
   ],
   image: {
     remotePatterns: [
-      { protocol: "https", hostname: "m.media-amazon.com" },
+      { protocol: "https", hostname: "image.tmdb.org" },
       { protocol: "https", hostname: "covers.openlibrary.org" },
     ],
   },

@@ -49,7 +49,7 @@ export const films: Film[] = [
     title: "Nosferatu",
     year: 2024,
     poster:
-      "https://www.omdbapi.com/?t=Nosferatu&y=2024&apikey=26e67a25",
+      "https://image.tmdb.org/t/p/w200/5qGIxdEO841C0tdY8vKuYvCBsbb.jpg","
     type: "film",
     rating: 5,
     tags: ["horror"],
@@ -58,7 +58,7 @@ export const films: Film[] = [
     title: "The Brutalist",
     year: 2024,
     poster:
-      "https://m.media-amazon.com/images/M/MV5BOTJkMmZhMjAtZjcwYy00MGY1LWJmYmEtYTdiOGY3YTUyNGMwXkEyXkFqcGc@._V1_SX300.jpg",
+      "https://image.tmdb.org/t/p/w200/czIQldhFcMOKkyB5F0K8RW6WZMT.jpg",
     type: "film",
     rating: 5,
     tags: ["drama"],
@@ -67,7 +67,7 @@ export const films: Film[] = [
     title: "Conclave",
     year: 2024,
     poster:
-      "https://m.media-amazon.com/images/M/MV5BNjM2NTY2OTMtM2IwOS00NDQ1LWJjYmEtNGM1YjBiM2ZhOWIxXkEyXkFqcGc@._V1_SX300.jpg",
+      "https://image.tmdb.org/t/p/w200/czIQldhFcMOKkyB5F0K8RW6WZMT.jpg",
     type: "film",
     rating: 4,
     tags: ["thriller"],
