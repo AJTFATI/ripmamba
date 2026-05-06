@@ -22,14 +22,14 @@ export type Film = {
 
 export const books: Book[] = [
   {
-    title: "Mistborn: The Final Empire",
+    title: "Mistborn",
     author: "Brandon Sanderson",
     cover: mistborn,
     rating: 5,
     tags: ["fantasy"],
   },
   {
-    title: "Mistborn: The Well of Ascension",
+    title: "The Well of Ascension, Mistborn #2",
     author: "Brandon Sanderson",
     cover: wellofascension, // ✅ fixed
     rating: 5,
