@@ -108,7 +108,7 @@ const statusLabels: Record<StatusType, string> = {
             </div>
           </article>
         );
-      })}
+      })}x
     </div>
 
     <p class="shelf-count" id="shelf-count">{items.length} items</p>
@@ -311,31 +311,44 @@ const statusLabels: Record<StatusType, string> = {
 
 <script>
   const btns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-  const cards = document.querySelectorAll<HTMLElement>(".shelf-card");
+  const grid = document.getElementById("shelf-grid");
   const countEl = document.getElementById("shelf-count");
+
+  let currentFilter = "all";
+
+  function applyFilterAndSort() {
+    const cards = Array.from(grid?.querySelectorAll<HTMLElement>(".shelf-card") ?? []);
+
+    // Sort all cards alphabetically by title
+    cards.sort((a, b) => (a.dataset.title ?? "").localeCompare(b.dataset.title ?? ""));
+    cards.forEach(card => grid?.appendChild(card));
+
+    // Filter
+    let visible = 0;
+    cards.forEach(card => {
+      const show = currentFilter === "all" || card.dataset.type === currentFilter;
+      if (show) {
+        card.removeAttribute("data-hidden");
+        visible++;
+      } else {
+        card.setAttribute("data-hidden", "");
+      }
+    });
+
+    if (countEl) {
+      const label = currentFilter === "all" ? "items" : currentFilter === "book" ? "books" : currentFilter === "film" ? "films" : "shows";
+      countEl.textContent = `${visible} ${label}`;
+    }
+  }
 
   btns.forEach(btn => {
     btn.addEventListener("click", () => {
       btns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-
-      const filter = btn.dataset.filter ?? "all";
-      let visible = 0;
-
-      cards.forEach(card => {
-        const show = filter === "all" || card.dataset.type === filter;
-        if (show) {
-          card.removeAttribute("data-hidden");
-          visible++;
-        } else {
-          card.setAttribute("data-hidden", "");
-        }
-      });
-
-      if (countEl) {
-        const label = filter === "all" ? "items" : filter === "book" ? "books" : filter === "film" ? "films" : "shows";
-        countEl.textContent = `${visible} ${label}`;
-      }
+      currentFilter = btn.dataset.filter ?? "all";
+      applyFilterAndSort();
     });
   });
+
+  applyFilterAndSort();
 </script>
