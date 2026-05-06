@@ -26,11 +26,42 @@ function stars(rating: number) {
           {books.map(book => (
             <li class="shelf-item">
               <div class="cover">
-                <img
+               ---
+import { Image } from "astro:assets";
+import type { Book, Film } from "../data/shelf";
+
+interface Props {
+  books: Book[];
+  films: Film[];
+}
+
+const { books, films } = Astro.props;
+
+function coverUrl(olid: string) {
+  return `https://covers.openlibrary.org/b/olid/${olid}-M.jpg`;
+}
+
+function stars(rating: number) {
+  return Array.from({ length: 5 }, (_, i) => (i < rating ? "★" : "☆")).join("");
+}
+---
+
+<section class="shelf">
+  {
+    books.length > 0 && (
+      <div class="shelf-section">
+        <h2 class="shelf-heading">Books</h2>
+        <ul class="shelf-grid" role="list">
+          {books.map(book => (
+            <li class="shelf-item">
+              <div class="cover">
+                <Image
                   src={coverUrl(book.olid)}
                   alt={`Cover of ${book.title}`}
-                  width="80"
-                  height="120"
+                  width={80}
+                  height={120}
+                  format="webp"
+                  quality={80}
                   loading="lazy"
                   decoding="async"
                   onerror="this.style.opacity='0'"
@@ -63,7 +94,37 @@ function stars(rating: number) {
           {films.map(film => (
             <li class="shelf-item">
               <div class="cover">
-                <img
+                <Image
+                  src={film.poster}
+                  alt={`Poster for ${film.title}`}
+                  width={80}
+                  height={120}
+                  format="webp"
+                  quality={80}
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.style.opacity='0'"
+                />
+              </div>
+              <p class="item-title">{film.title}</p>
+              <p class="item-sub">{film.year}</p>
+              <p class="item-stars" aria-label={`Rated ${film.rating} out of 5`}>
+                {stars(film.rating)}
+              </p>
+              {film.tags && (
+                <ul class="tag-list" role="list">
+                  {film.tags.map(tag => (
+                    <li class="tag">{tag}</li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</section>
                   src={film.poster}
                   alt={`Poster for ${film.title}`}
                   width="80"

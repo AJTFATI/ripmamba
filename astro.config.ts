@@ -48,7 +48,14 @@ export default defineConfig({
     responsiveStyles: true,
     layout: "constrained",
   },
-  env: {
+  image: {
+  remotePatterns: [
+    { protocol: "https", hostname: "m.media-amazon.com" },
+    { protocol: "https", hostname: "covers.openlibrary.org" },
+  ],
+},
+
+env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
         access: "public",
