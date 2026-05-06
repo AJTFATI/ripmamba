@@ -1,0 +1,197 @@
+---
+import type { Book, Film } from "../data/shelf";
+
+interface Props {
+  books: Book[];
+  films: Film[];
+}
+
+const { books, films } = Astro.props;
+
+function coverUrl(olid: string) {
+  return `https://covers.openlibrary.org/b/olid/${olid}-M.jpg`;
+}
+
+function stars(rating: number) {
+  return Array.from({ length: 5 }, (_, i) => (i < rating ? "★" : "☆")).join("");
+}
+---
+
+<section class="shelf">
+  {
+    books.length > 0 && (
+      <div class="shelf-section">
+        <h2 class="shelf-heading">Books</h2>
+        <ul class="shelf-grid" role="list">
+          {books.map(book => (
+            <li class="shelf-item">
+              <div class="cover">
+                <img
+                  src={coverUrl(book.olid)}
+                  alt={`Cover of ${book.title}`}
+                  width="80"
+                  height="120"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.style.opacity='0'"
+                />
+              </div>
+              <p class="item-title">{book.title}</p>
+              <p class="item-sub">{book.author}</p>
+              <p class="item-stars" aria-label={`Rated ${book.rating} out of 5`}>
+                {stars(book.rating)}
+              </p>
+              {book.tags && (
+                <ul class="tag-list" role="list">
+                  {book.tags.map(tag => (
+                    <li class="tag">{tag}</li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  {
+    films.length > 0 && (
+      <div class="shelf-section">
+        <h2 class="shelf-heading">Films &amp; shows</h2>
+        <ul class="shelf-grid" role="list">
+          {films.map(film => (
+            <li class="shelf-item">
+              <div class="cover">
+                <img
+                  src={film.poster}
+                  alt={`Poster for ${film.title}`}
+                  width="80"
+                  height="120"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.style.opacity='0'"
+                />
+              </div>
+              <p class="item-title">{film.title}</p>
+              <p class="item-sub">{film.year}</p>
+              <p class="item-stars" aria-label={`Rated ${film.rating} out of 5`}>
+                {stars(film.rating)}
+              </p>
+              {film.tags && (
+                <ul class="tag-list" role="list">
+                  {film.tags.map(tag => (
+                    <li class="tag">{tag}</li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .shelf {
+    margin-block: 2rem;
+  }
+
+  .shelf-section {
+    margin-bottom: 2.5rem;
+  }
+
+  /*
+    Your global styles set h2 { color: #cd9541 } which would
+    hit the section label. We scope it with .shelf-heading
+    and pull it back to --muted instead.
+  */
+  .shelf-heading {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .shelf-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .shelf-item {
+    width: 80px;
+  }
+
+  .cover {
+    width: 80px;
+    height: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    /* warm dark fill shown while image loads */
+    background-color: color-mix(in srgb, var(--muted) 25%, var(--background));
+  }
+
+  .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.2s;
+  }
+
+  .item-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+    line-height: 1.3;
+    color: var(--foreground);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .item-sub {
+    font-size: 0.65rem;
+    color: color-mix(in srgb, var(--foreground) 45%, transparent);
+    margin: 0.1rem 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* accent (#cd9541) is already your star color — perfect */
+  .item-stars {
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    margin: 0.2rem 0 0;
+    color: var(--accent);
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    padding: 1px 6px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: color-mix(in srgb, var(--foreground) 45%, transparent);
+    white-space: nowrap;
+  }
+</style>

@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "./typography.css";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
 :root {
   --background: #020008;
   --foreground: #e8e3e1;

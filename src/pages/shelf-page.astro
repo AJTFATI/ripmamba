@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Shelf from "../components/Shelf.astro";
+import { books, films } from "../data/shelf";
+---
+
+<Layout title="Shelf — 2025" description="Books and films I consumed in 2025.">
+  <main class="app-layout py-8">
+    <h1>Shelf</h1>
+    <p class="shelf-intro">Everything I read and watched in 2025.</p>
+    <Shelf books={books} films={films} />
+  </main>
+</Layout>
+
+<style>
+  .shelf-intro {
+    color: color-mix(in srgb, var(--foreground) 50%, transparent);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+</style>
