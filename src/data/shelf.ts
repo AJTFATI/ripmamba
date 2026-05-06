@@ -1,6 +1,7 @@
 import type { ImageMetadata } from "astro";
 import mistborn from "@/assets/posters/mistborn-thefinalempire.jpg";
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
+import wellofascension from "@/assets/posters/wellofascension.jpg";
 
 export type Book = {
   title: string;
@@ -27,13 +28,13 @@ export const books: Book[] = [
     rating: 5,
     tags: ["fantasy"],
   },
-  // {
-  //   title: "",
-  //   author: "",
-  //   cover: ,
-  //   rating: 5,
-  //   tags: [""],
-  // },
+  {
+    title: "Mistborn: The Well of Ascension",
+    author: "Brandon Sanderson",
+    cover: wellofascension, // ✅ fixed
+    rating: 5,
+    tags: ["fantasy"],
+  },
 ];
 
 export const films: Film[] = [
@@ -45,12 +46,4 @@ export const films: Film[] = [
     rating: 5,
     tags: ["drama"],
   },
-  // {
-  //   title: "",
-  //   year: 2024,
-  //   poster: ,
-  //   type: "film",
-  //   rating: 5,
-  //   tags: [""],
-  // },
 ];
