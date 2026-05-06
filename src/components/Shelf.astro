@@ -26,16 +26,16 @@ function stars(rating: number) {
         {books.map(book => (
           <li class="shelf-item">
             <div class="cover">
-              <Image
-                src={book.cover}
-                alt={`Cover of ${book.title}`}
-                width="80"
-                height="120"
-                format="webp
-                quality=[80]
-                loading="lazy"
-                decoding="async"
-              />
+             <Image
+  src={book.cover}
+  alt={`Cover of ${book.title}`}
+  width={80}
+  height={120}
+  format="webp"
+  quality={80}
+  loading="lazy"
+  decoding="async"
+/>
             </div>
             <p class="item-title">{book.title}</p>
             <p class="item-sub">{book.author}</p>
