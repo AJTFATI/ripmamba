@@ -7,20 +7,10 @@ import Shelf from "@/components/Shelf.astro";
 import { books, films } from "@/data/shelf";
 ---
 
-<Layout title="Shelf — 2025" description="Books and films I consumed in 2025.">
+<Layout title="Shelf — 2025" description="Books and movies I finished in 2026.">
   <Header />
-  <Main>
-    <h1>Shelf</h1>
-    <p class="shelf-intro">Everything I read and watched in 2025.</p>
+  <Main pageTitle="Shelf" pageDesc="Media 2K26">
     <Shelf books={books} films={films} />
   </Main>
   <Footer />
 </Layout>
-
-<style>
-  .shelf-intro {
-    color: color-mix(in srgb, var(--foreground) 50%, transparent);
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-  }
-</style>
