@@ -49,7 +49,7 @@ export const films: Film[] = [
     title: "Nosferatu",
     year: 2024,
     poster:
-      "https://image.tmdb.org/t/p/w200/5qGIxdEO841C0tdY8vKuYvCBsbb.jpg","
+      "https://image.tmdb.org/t/p/w200/5qGIxdEO841C0tdY8vKuYvCBsbb.jpg",
     type: "film",
     rating: 5,
     tags: ["horror"],
