@@ -3,14 +3,14 @@ import Main from "@/layouts/Main.astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Shelf from "@/components/Shelf.astro";
+import ShelfComponent from "@/components/Shelf.astro";
 import { books, films } from "@/data/shelf";
 ---
 
 <Layout title="Shelf — 2025" description="Books and movies I finished in 2026.">
   <Header />
   <Main pageTitle="Shelf" pageDesc="Media 2K26">
-    <Shelf books={books} films={films} />
+    <ShelfComponent books={books} films={films} />
   </Main>
   <Footer />
 </Layout>
