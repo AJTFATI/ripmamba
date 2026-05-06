@@ -49,7 +49,7 @@ export const films: Film[] = [
     title: "Nosferatu",
     year: 2024,
     poster:
-      "https://m.media-amazon.com/images/M/MV5BOGRlNzljM2UtZDQ5Zi00YzAzLWI3ZGMtZjBhY2ZkMDE1NTMzXkEyXkFqcGc@._V1_SX300.jpg",
+      "https://www.omdbapi.com/?t=Nosferatu&y=2024&apikey=26e67a25",
     type: "film",
     rating: 5,
     tags: ["horror"],
