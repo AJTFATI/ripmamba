@@ -111,7 +111,7 @@ function stars(rating: number) {
     padding: 0;
     margin: 0;
   }
-  .shelf-item { width: 80px; }
+  .shelf-item { width: 104px; }
   .cover {
     width: 80px;
     height: 120px;
@@ -136,7 +136,7 @@ function stars(rating: number) {
     color: var(--foreground);
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
   .item-sub {
@@ -144,8 +144,8 @@ function stars(rating: number) {
     color: color-mix(in srgb, var(--foreground) 45%, transparent);
     margin: 0.1rem 0 0;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: visible
+    text-overflow: unset;
   }
   .item-stars {
     font-size: 0.65rem;
