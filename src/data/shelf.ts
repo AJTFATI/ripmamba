@@ -1,6 +1,6 @@
 import type { ImageMetadata } from "astro";
-import mistborn-thefinalempire from "@/assets/posters/Mistborn-TheFinalEmpire.jpg";
-import thebookofclarence from "@assets/posters/thebookofclarence.jpg";
+import mistborn from "@/assets/posters/mistborn-thefinalempire.jpg";
+import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 
 export type Book = {
   title: string;
@@ -21,51 +21,36 @@ export type Film = {
 
 export const books: Book[] = [
   {
-    title: "The Road",
-    author: "Cormac McCarthy",
-    cover: theRoad,
+    title: "Mistborn: The Final Empire",
+    author: "Brandon Sanderson",
+    cover: mistborn,
     rating: 5,
-    tags: ["fiction"],
+    tags: ["fantasy"],
   },
-  {
-    title: "Dune",
-    author: "Frank Herbert",
-    cover: dune,
-    rating: 5,
-    tags: ["sci-fi"],
-  },
-  {
-    title: "Meditations",
-    author: "Marcus Aurelius",
-    cover: meditations,
-    rating: 5,
-    tags: ["philosophy"],
-  },
+  // {
+  //   title: "",
+  //   author: "",
+  //   cover: ,
+  //   rating: 5,
+  //   tags: [""],
+  // },
 ];
 
 export const films: Film[] = [
   {
-    title: "Nosferatu",
+    title: "The Book of Clarence",
     year: 2024,
-    poster: nosferatu,
-    type: "film",
-    rating: 5,
-    tags: ["horror"],
-  },
-  {
-    title: "The Brutalist",
-    year: 2024,
-    poster: brutalist,
+    poster: theBookOfClarence,
     type: "film",
     rating: 5,
     tags: ["drama"],
   },
-  {
-    title: "Conclave",
-    year: 2024,
-    poster: conclave,
-    type: "film",
-    rating: 4,
-    tags: ["thriller"],
-  },
+  // {
+  //   title: "",
+  //   year: 2024,
+  //   poster: ,
+  //   type: "film",
+  //   rating: 5,
+  //   tags: [""],
+  // },
 ];
