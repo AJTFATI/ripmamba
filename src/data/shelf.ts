@@ -1,10 +1,6 @@
 import type { ImageMetadata } from "astro";
 import mistborn-thefinalempire from "@/assets/posters/Mistborn-TheFinalEmpire.jpg";
 import thebookofclarence from "@assets/posters/thebookofclarence.jpg";
-import conclave from "@/assets/posters/conclave.jpg";
-import theRoad from "@/assets/posters/the-road.jpg";
-import dune from "@/assets/posters/dune.jpg";
-import meditations from "@/assets/posters/meditations.jpg";
 
 export type Book = {
   title: string;
