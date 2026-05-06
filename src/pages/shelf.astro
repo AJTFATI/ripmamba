@@ -21,13 +21,18 @@ interface ShelfItem {
   review?: string;
 }
 
-const items: ShelfItem[] = shelfData as ShelfItem[];
+// FIX 1: Sort here instead of the script tag. 
+// This makes the page load instantly in the right order.
+const items = (shelfData as ShelfItem[]).sort((a, b) => a.title.localeCompare(b.title));
 
 function coverUrl(item: ShelfItem): string {
   if (item.type === "book" && item.isbn) {
     return `https://covers.openlibrary.org/b/isbn/${item.isbn}-M.jpg`;
   }
-  if (item.cover) return item.cover;
+  if (item.cover) {
+    // FIX 2: Auto-resize TMDB images from 1280px to 300px
+    return item.cover.replace("/w1280/", "/w300/");
+  }
   return "";
 }
 
@@ -61,7 +66,7 @@ const statusLabels: Record<StatusType, string> = {
     </div>
 
     <div class="shelf-grid" id="shelf-grid">
-      {items.map((item) => {
+      {items.map((item, index) => {
         const cover = coverUrl(item);
         const hasReview = item.review && item.review.length > 0;
         return (
@@ -69,22 +74,17 @@ const statusLabels: Record<StatusType, string> = {
             <div class="card-cover">
               {cover ? (
                 <img
-                  src={cover}
-                  alt={`Cover of ${item.title}`}
-                  loading="lazy"
-                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-                />
+  src={cover}
+  alt={`Cover of ${item.title}`}
+  loading={index < 6 ? "eager" : "lazy"}
+  width="200"
+  height="300"
+  decoding="async"
+  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+/>
               ) : null}
               <div class="cover-placeholder" style={cover ? "display:none" : ""}>
-                {item.type === "book" && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                )}
-                {item.type === "film" && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
-                )}
-                {item.type === "tv" && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
-                )}
+                 {/* ... (Keep your SVG code here) ... */}
               </div>
               <div class={`status-pip status-${item.status}`} title={statusLabels[item.status]}></div>
             </div>
@@ -118,224 +118,49 @@ const statusLabels: Record<StatusType, string> = {
 </Layout>
 
 <style>
-  .shelf-header {
-    margin-bottom: 1.5rem;
-  }
-  .shelf-title {
-    /* inherits h1 color: #cd9541 from your global styles */
-    margin: 0 0 0.25rem;
-    font-size: 2rem;
-  }
-  .shelf-sub {
-    color: rgba(232, 227, 225, 0.5);
-    font-size: 0.9rem;
-    margin: 0;
-    font-style: italic;
-  }
-
-  /* Filter bar */
-  .filter-bar {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-  .filter-btn {
-    background: transparent;
-    border: 1px solid rgba(218, 213, 211, 0.2);
-    color: var(--foreground);
-    font-family: var(--font-app);
-    font-size: 0.8rem;
-    padding: 4px 14px;
-    border-radius: 99px;
-    cursor: pointer;
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
-  }
-  .filter-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-  .filter-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #020008;
-    font-weight: 500;
-  }
-
-  /* Grid */
-  .shelf-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 16px;
-  }
-
-  /* Card */
+  /* ... (Keep your existing styles) ... */
+  
+  /* ADD THIS to make scrolling 100 items smoother */
   .shelf-card {
-    background: #0d0a14;
-    border: 1px solid rgba(218, 213, 211, 0.12);
-    border-radius: 6px;
-    overflow: hidden;
-    transition: border-color 0.15s;
-  }
-  .shelf-card:hover {
-    border-color: var(--accent);
-  }
-  .shelf-card[data-hidden] {
-    display: none;
-  }
-
-  /* Cover */
-  .card-cover {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 2 / 3;
-    background: var(--muted);
-    overflow: hidden;
-  }
-  .card-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .cover-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(232, 227, 225, 0.35);
-  }
-
-  /* Status pip */
-  .status-pip {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-  }
-  .status-read    { background: var(--accent); }
-  .status-watching { background: #e8a07a; }
-  .status-want    { background: rgba(232, 227, 225, 0.3); }
-
-  /* Card body */
-  .card-body {
-    padding: 8px 10px 10px;
-  }
-  .card-title {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #f2eeec;
-    margin: 0 0 2px;
-    line-height: 1.35;
-  }
-  .card-meta {
-    font-size: 0.7rem;
-    color: rgba(232, 227, 225, 0.45);
-    margin: 0 0 6px;
-    font-style: italic;
-    line-height: 1.3;
-  }
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 4px;
-  }
-
-  /* Type badge */
-  .type-badge {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    padding: 2px 7px;
-    border-radius: 99px;
-    font-style: normal;
-    font-family: sans-serif;
-  }
-  .type-book {
-    background: rgba(205, 149, 65, 0.15);
-    color: var(--accent);
-    border: 1px solid rgba(205, 149, 65, 0.3);
-  }
-  .type-film {
-    background: rgba(83, 38, 23, 0.5);
-    color: #e8a07a;
-    border: 1px solid rgba(83, 38, 23, 0.9);
-  }
-  .type-tv {
-    background: rgba(232, 227, 225, 0.06);
-    color: rgba(232, 227, 225, 0.5);
-    border: 1px solid rgba(218, 213, 211, 0.15);
-  }
-
-  /* Stars */
-  .stars {
-    color: var(--accent);
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    flex-shrink: 0;
-  }
-  .want-label {
-    font-size: 0.6rem;
-    color: rgba(232, 227, 225, 0.3);
-    font-style: italic;
-    font-family: sans-serif;
-  }
-
-  /* Review link */
-  .review-link {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.65rem;
-    color: var(--accent);
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.15s;
-  }
-  .review-link:hover {
-    opacity: 1;
-  }
-
-  /* Count */
-  .shelf-count {
-    margin-top: 2rem;
-    font-size: 0.75rem;
-    color: rgba(232, 227, 225, 0.3);
-    font-style: italic;
-    text-align: right;
+    content-visibility: auto;
+    contain-intrinsic-size: 130px 200px;
   }
 </style>
 
 <script>
   const btns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-  const cards = document.querySelectorAll<HTMLElement>(".shelf-card");
+  const grid = document.getElementById("shelf-grid");
   const countEl = document.getElementById("shelf-count");
+
+  let currentFilter = "all";
+
+  // FIX 5: Simplified this to ONLY filter. Sorting is now handled by Astro.
+  function applyFilter() {
+    const cards = Array.from(grid?.querySelectorAll<HTMLElement>(".shelf-card") ?? []);
+    let visible = 0;
+    
+    cards.forEach(card => {
+      const show = currentFilter === "all" || card.dataset.type === currentFilter;
+      if (show) {
+        card.removeAttribute("data-hidden");
+        visible++;
+      } else {
+        card.setAttribute("data-hidden", "");
+      }
+    });
+
+    if (countEl) {
+      const label = currentFilter === "all" ? "items" : currentFilter === "book" ? "books" : currentFilter === "film" ? "films" : "shows";
+      countEl.textContent = `${visible} ${label}`;
+    }
+  }
 
   btns.forEach(btn => {
     btn.addEventListener("click", () => {
       btns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-
-      const filter = btn.dataset.filter ?? "all";
-      let visible = 0;
-
-      cards.forEach(card => {
-        const show = filter === "all" || card.dataset.type === filter;
-        if (show) {
-          card.removeAttribute("data-hidden");
-          visible++;
-        } else {
-          card.setAttribute("data-hidden", "");
-        }
-      });
-
-      if (countEl) {
-        const label = filter === "all" ? "items" : filter === "book" ? "books" : filter === "film" ? "films" : "shows";
-        countEl.textContent = `${visible} ${label}`;
-      }
+      currentFilter = btn.dataset.filter ?? "all";
+      applyFilter();
     });
   });
 </script>
