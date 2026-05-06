@@ -4,7 +4,10 @@
   "exclude": ["dist", "public/pagefind"],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@components/*": ["./src/components/*"],
+      "@data/*": ["./src/data/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
