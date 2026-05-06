@@ -43,12 +43,8 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
-  },
-  image: {
-    responsiveStyles: true,
-    layout: "constrained",
-  },
-  image: {
+ image: {
+  experimentalLayout: "constrained", // or whatever was there before
   remotePatterns: [
     { protocol: "https", hostname: "m.media-amazon.com" },
     { protocol: "https", hostname: "covers.openlibrary.org" },
@@ -65,7 +61,6 @@ env: {
     },
   },
   experimental: {
-    preserveScriptOrder: true,
     fonts: [
       {
         name: "Newsreader",
