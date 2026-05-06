@@ -29,7 +29,7 @@ export const books: Book[] = [
     tags: ["fantasy"],
   },
   {
-    title: "The Well of Ascension, Mistborn #2",
+    title: "The Well of Ascension",
     author: "Brandon Sanderson",
     cover: wellofascension, // ✅ fixed
     rating: 5,
