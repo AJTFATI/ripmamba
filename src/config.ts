@@ -4,7 +4,7 @@ export const SITE = {
   desc: "Everything, Everywhere, All at Once.",
   title: "Alexander J. Taylor",
   author: "Alexander J. Taylor",
-  profile: "https://ripmamba.pages.dev/".
+  profile: "https://ripmamba.pages.dev/",
   ogImage: "ajt-headtest.svg",
   lightAndDarkMode: false,
   postPerIndex: 4,
