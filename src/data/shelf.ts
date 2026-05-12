@@ -3,12 +3,14 @@ import mistborn from "@/assets/posters/mistborn-thefinalempire.jpg";
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import wellofascension from "@/assets/posters/wellofascension.jpg";
 import heroofages from "@/assets/posters/heroofages-mistborn3.jpg";
+
 export type Book = {
   title: string;
   author: string;
   cover: ImageMetadata;
   rating: 1 | 2 | 3 | 4 | 5;
   tags?: string[];
+  postSlug?: string;
 };
 
 export type Film = {
@@ -18,6 +20,7 @@ export type Film = {
   type: "film" | "show";
   rating: 1 | 2 | 3 | 4 | 5;
   tags?: string[];
+  postSlug?: string;
 };
 
 export const books: Book[] = [
@@ -31,26 +34,7 @@ export const books: Book[] = [
   {
     title: "Mistborn: The Well of Ascension",
     author: "Brandon Sanderson",
-    cover: wellofascension, // ✅ fixed
+    cover: wellofascension,
     rating: 5,
     tags: ["fantasy"],
-  },
-{
-  title: "Mistborn: The Hero of Ages",
-  author: "Brandon Sanderson",
-  cover: heroofages,
-  rating: 5,
-  tags: ["fantasy"],
-},
-];
-
-export const films: Film[] = [
-  {
-    title: "The Book of Clarence",
-    year: 2024,
-    poster: theBookOfClarence,
-    type: "film",
-    rating: 5,
-    tags: ["drama"],
-  },
-];
+  }
