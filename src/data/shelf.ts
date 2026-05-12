@@ -4,6 +4,7 @@ import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import wellofascension from "@/assets/posters/wellofascension.jpg";
 import heroofages from "@/assets/posters/heroofages-mistborn3.jpg";
 import alloyoflaw from "@/assets/posters/alloyoflaw-mistborn4.jpg";
+
 export type Book = {
   title: string;
   author: string;
@@ -45,13 +46,13 @@ export const books: Book[] = [
     rating: 5,
     tags: ["fantasy"],
   },
-   title: "Mistborn: The Alloy of Law",
+  {
+    title: "Mistborn: The Alloy of Law",
     author: "Brandon Sanderson",
-    cover: heroofages,
+    cover: alloyoflaw,
     rating: 5,
     tags: ["fantasy"],
   },
-
 ];
 
 export const films: Film[] = [
