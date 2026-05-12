@@ -14,6 +14,9 @@ import { SITE } from "./src/config";
 export default defineConfig({
   site: SITE.website,
   trailingSlash: 'always',
+  build: {
+    inlineStylesheets: "auto",
+  },
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
@@ -42,6 +45,7 @@ export default defineConfig({
       fallbacks: ["serif"],
       weights: [500],
       styles: ["normal", "italic"],
+      display: "swap",
     },
   ],
 },
