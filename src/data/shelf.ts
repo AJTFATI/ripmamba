@@ -37,4 +37,23 @@ export const books: Book[] = [
     cover: wellofascension,
     rating: 5,
     tags: ["fantasy"],
-  }
+  },
+  {
+    title: "Mistborn: The Hero of Ages",
+    author: "Brandon Sanderson",
+    cover: heroofages,
+    rating: 5,
+    tags: ["fantasy"],
+  },
+];
+
+export const films: Film[] = [
+  {
+    title: "The Book of Clarence",
+    year: 2024,
+    poster: theBookOfClarence,
+    type: "film",
+    rating: 5,
+    tags: ["drama"],
+  },
+];
