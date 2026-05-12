@@ -1,26 +1,23 @@
 ---
 import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconArchive from "@/assets/icons/IconArchive.svg";
-import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
 import HeaderTest from "@/assets/icons/ajt-headtest.svg";
 import { SITE } from "@/config";
 
 const { pathname } = Astro.url;
 
-// Remove trailing slash from current pathname if exists
 const currentPath =
   pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
   const pathArray = path.split("/").filter(p => p.trim());
-
   return currentPath === path || currentPathArray[0] === pathArray[0];
 };
 ---
 
-<a
+
   id="skip-to-content"
   href="#main-content"
   class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4"
@@ -28,9 +25,7 @@ const isActive = (path: string) => {
   Skip to content
 </a>
 
-<header
-  class="app-layout flex flex-col items-center justify-between sm:flex-row"
->
+<header class="app-layout flex flex-col items-center justify-between sm:flex-row">
   <div
     id="top-nav-wrap"
     class:list={[
@@ -40,13 +35,14 @@ const isActive = (path: string) => {
       "flex items-baseline justify-between sm:items-center",
     ]}
   >
-    <a
-       href="/"
-  class="absolute py-1 whitespace-nowrap sm:static sm:my-auto"
-  aria-label={SITE.title}
->
-  <HeaderTest class="h-20 w-auto" />
-</a>
+    
+      href="/"
+      class="absolute py-1 whitespace-nowrap sm:static sm:my-auto"
+      aria-label={SITE.title}
+    >
+      <HeaderTest class="h-20 w-auto" />
+    </a>
+
     <nav
       id="nav-menu"
       class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
@@ -58,12 +54,19 @@ const isActive = (path: string) => {
         aria-expanded="false"
         aria-controls="menu-items"
       >
-       <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M18 6l-12 12" />
-  <path d="M6 6l12 12" />
-</svg>
+        <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M18 6l-12 12" />
+          <path d="M6 6l12 12" />
+        </svg>
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M4 6l16 0" />
+          <path d="M4 12l16 0" />
+          <path d="M4 18l16 0" />
+        </svg>
       </button>
+
       <ul
         id="menu-items"
         class:list={[
@@ -74,18 +77,13 @@ const isActive = (path: string) => {
         ]}
       >
         <li class="col-span-2">
-          <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>
-            Posts
-          </a>
+          <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>Posts</a>
+        </li>
         <li class="col-span-2">
-  <a href="/shelf" class:list={{ "active-nav": isActive("/shelf") }}>
-    Shelf
-  </a>
-</li>
+          <a href="/shelf" class:list={{ "active-nav": isActive("/shelf") }}>Shelf</a>
+        </li>
         <li class="col-span-2">
-          <a href="/about" class:list={{ "active-nav": isActive("/about") }}>
-            About
-          </a>
+          <a href="/about" class:list={{ "active-nav": isActive("/about") }}>About</a>
         </li>
         {
           SITE.showArchives && (
@@ -94,9 +92,7 @@ const isActive = (path: string) => {
                 href="/archives"
                 class:list={[
                   "focus-outline flex justify-center p-3 sm:p-1",
-                  {
-                    "active-nav [&>svg]:stroke-accent": isActive("/archives"),
-                  },
+                  { "active-nav [&>svg]:stroke-accent": isActive("/archives") },
                 ]}
                 title="Archives"
                 aria-label="archives"
@@ -120,8 +116,7 @@ const isActive = (path: string) => {
             <IconSearch />
             <span class="sr-only">Search</span>
           </LinkButton>
-
-        }
+        </li>
       </ul>
     </nav>
   </div>
@@ -138,10 +133,8 @@ const isActive = (path: string) => {
 
     menuBtn.addEventListener("click", () => {
       const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
-
       menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
       menuBtn.setAttribute("aria-label", openMenu ? "Open Menu" : "Close Menu");
-
       menuItems.classList.toggle("hidden");
       menuIcon.classList.toggle("hidden");
       closeIcon.classList.toggle("hidden");
@@ -149,7 +142,5 @@ const isActive = (path: string) => {
   }
 
   toggleNav();
-
-  // Runs on view transitions navigation
   document.addEventListener("astro:after-swap", toggleNav);
 </script>
