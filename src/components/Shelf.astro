@@ -9,16 +9,56 @@ interface Props {
 
 const { books, films } = Astro.props;
 
-function coverUrl(olid: string) {
-  return `https://covers.openlibrary.org/b/olid/${olid}-M.jpg`;
-}
-
 function stars(rating: number) {
   return Array.from({ length: 5 }, (_, i) => (i < rating ? "★" : "☆")).join("");
 }
 ---
 
 <section class="shelf">
+  {films.length > 0 && (
+    <div class="shelf-section">
+      <h2 class="shelf-heading">Movies &amp; TV</h2>
+      <ul class="shelf-grid" role="list">
+        {films.map(film => (
+          <li class="shelf-item">
+            <div class="cover">
+              {film.postSlug ? (
+                <a href={`/posts/${film.postSlug}/`} title={`Read my thoughts on ${film.title}`}>
+                  <Image
+                    src={film.poster}
+                    alt={`Poster for ${film.title}`}
+                    width={120}
+                    height={180}
+                    format="webp"
+                    quality={85}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                <Image
+                  src={film.poster}
+                  alt={`Poster for ${film.title}`}
+                  width={120}
+                  height={180}
+                  format="webp"
+                  quality={85}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <p class="item-title">{film.title}</p>
+            <p class="item-sub">{film.year}</p>
+            <p class="item-stars" aria-label={`Rated ${film.rating} out of 5`}>
+              {stars(film.rating)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
   {books.length > 0 && (
     <div class="shelf-section">
       <h2 class="shelf-heading">Books</h2>
@@ -26,65 +66,37 @@ function stars(rating: number) {
         {books.map(book => (
           <li class="shelf-item">
             <div class="cover">
-             <Image
-  src={book.cover}
-  alt={`Cover of ${book.title}`}
-  width={80}
-  height={120}
-  format="webp"
-  quality={80}
-  loading="lazy"
-  decoding="async"
-/>
+              {book.postSlug ? (
+                <a href={`/posts/${book.postSlug}/`} title={`Read my thoughts on ${book.title}`}>
+                  <Image
+                    src={book.cover}
+                    alt={`Cover of ${book.title}`}
+                    width={120}
+                    height={180}
+                    format="webp"
+                    quality={85}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                <Image
+                  src={book.cover}
+                  alt={`Cover of ${book.title}`}
+                  width={120}
+                  height={180}
+                  format="webp"
+                  quality={85}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
             </div>
             <p class="item-title">{book.title}</p>
             <p class="item-sub">{book.author}</p>
             <p class="item-stars" aria-label={`Rated ${book.rating} out of 5`}>
               {stars(book.rating)}
             </p>
-            {book.tags && (
-              <ul class="tag-list" role="list">
-                {book.tags.map((tag: string) => (
-                  <li class="tag">{tag}</li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
-  )}
-
-  {films.length > 0 && (
-    <div class="shelf-section">
-      <h2 class="shelf-heading">Films &amp; shows</h2>
-      <ul class="shelf-grid" role="list">
-        {films.map(film => (
-          <li class="shelf-item">
-            <div class="cover">
-              <Image
-                src={film.poster}
-                alt={`Poster for ${film.title}`}
-                width={80}
-                height={120}
-                format="webp"
-                quality={80}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <p class="item-title">{film.title}</p>
-            <p class="item-sub">{film.year}</p>
-            <p class="item-stars" aria-label={`Rated ${film.rating} out of 5`}>
-              {stars(film.rating)}
-            </p>
-            {film.tags && (
-              <ul class="tag-list" role="list">
-                {film.tags.map((tag: string) => (
-                  <li class="tag">{tag}</li>
-                ))}
-              </ul>
-            )}
           </li>
         ))}
       </ul>
@@ -94,43 +106,67 @@ function stars(rating: number) {
 
 <style>
   .shelf { margin-block: 2rem; }
-  .shelf-section { margin-bottom: 2.5rem; }
+
+  .shelf-section { margin-bottom: 3rem; }
+
   .shelf-heading {
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
   }
+
   .shelf-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .shelf-item { width: 104px; }
+
+  .shelf-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
   .cover {
-    width: 80px;
-    height: 120px;
-    border-radius: 3px;
+    width: 120px;
+    height: 180px;
+    border-radius: 4px;
     overflow: hidden;
     border: 1px solid var(--border);
     background-color: color-mix(in srgb, var(--muted) 25%, var(--background));
   }
-  .cover img {
+
+  .cover img,
+  .cover a img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     transition: opacity 0.2s;
   }
+
+  .cover a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cover a:hover img {
+    opacity: 0.75;
+  }
+
   .item-title {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    margin-top: 0.4rem;
+    margin-top: 0.5rem;
     margin-bottom: 0;
     line-height: 1.3;
     color: var(--foreground);
@@ -139,34 +175,17 @@ function stars(rating: number) {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
+
   .item-sub {
     font-size: 0.65rem;
     color: color-mix(in srgb, var(--foreground) 45%, transparent);
-    margin: 0.1rem 0 0;
-    white-space: nowrap;
-    overflow: visible
-    text-overflow: unset;
+    margin: 0.15rem 0 0;
   }
+
   .item-stars {
     font-size: 0.65rem;
     letter-spacing: 0.04em;
     margin: 0.2rem 0 0;
     color: var(--accent);
-  }
-  .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px;
-    list-style: none;
-    padding: 0;
-    margin: 0.25rem 0 0;
-  }
-  .tag {
-    font-size: 0.6rem;
-    padding: 1px 6px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    color: color-mix(in srgb, var(--foreground) 45%, transparent);
-    white-space: nowrap;
   }
 </style>
