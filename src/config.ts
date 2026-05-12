@@ -1,8 +1,7 @@
 
 export const SITE = {
-  website: "https://alexanderjtaylor.com/", // replace this with your deployed domain
-  author: "Alexander J. Taylor",
-  profile: "https://alexanderjtaylor.com/",
+export default defineConfig({
+  website: process.env.SITE_URL ?? "https://ripmamba.pages.dev/",
   desc: "Everything, Everywhere, All at Once.",
   title: "Alexander J. Taylor",
   ogImage: "ajt-headtest.svg",

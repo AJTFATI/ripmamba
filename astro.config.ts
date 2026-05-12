@@ -13,6 +13,7 @@ import { SITE } from "./src/config";
 
 export default defineConfig({
   site: SITE.website,
+  trailingSlash: 'always',
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
