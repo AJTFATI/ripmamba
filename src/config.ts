@@ -1,6 +1,5 @@
 
 export const SITE = {
-export default defineConfig({
   website: process.env.SITE_URL ?? "https://ripmamba.pages.dev/",
   desc: "Everything, Everywhere, All at Once.",
   title: "Alexander J. Taylor",
