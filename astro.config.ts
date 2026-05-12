@@ -39,8 +39,8 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Newsreader",
       cssVariable: "--font-newsreader",
-      fallbacks: ["monospace"],
-      weights: [300, 400, 500, 600, 700],
+      fallbacks: ["serif"],
+      weights: [500],
       styles: ["normal", "italic"],
     },
   ],
@@ -49,9 +49,6 @@ vite: {
   plugins: [tailwindcss()],
   optimizeDeps: {
     exclude: ["@resvg/resvg-js"],
-  },
-  build: {
-    cssCodeSplit: false,
   },
 },
   env: {
