@@ -45,14 +45,15 @@ export default defineConfig({
     },
   ],
 },
-  vite: {
-    plugins: [tailwindcss()],
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"],
-    },
-  },build: {
+vite: {
+  plugins: [tailwindcss()],
+  optimizeDeps: {
+    exclude: ["@resvg/resvg-js"],
+  },
+  build: {
     cssCodeSplit: false,
   },
+},
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
