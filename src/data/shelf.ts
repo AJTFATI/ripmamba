@@ -9,6 +9,9 @@ import bandsofmourning from "@/assets/posters/bandsofmourning-mistborn6.jpg";
 import thelostmetal from "@/assets/posters/thelostmetal-mistborn7.jpg";
 import yesteryear from "@/assets/posters/yesteryear.jpg";
 import ringshout from "@/assets/posters/ringshout.jpg";
+import carelesspeople from "@/assets/posters/carelesspeople.jpg";
+import algospeak from "@/assets/posters/algospeak.jpg";
+import menwhohatewomen from "@/assets/posters/menwhohatewomen.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -30,49 +33,49 @@ export type Film = {
 
 export const books: Book[] = [
   {
-    title: "Mistborn",
+    title: "The Final Empire",
     author: "Brandon Sanderson",
     cover: mistborn,
     rating: 5,
     tags: ["fantasy"],
   },
   {
-    title: "Mistborn: The Well of Ascension",
+    title: "The Well of Ascension",
     author: "Brandon Sanderson",
     cover: wellofascension,
     rating: 5,
     tags: ["fantasy"],
   },
   {
-    title: "Mistborn: The Hero of Ages",
+    title: "The Hero of Ages",
     author: "Brandon Sanderson",
     cover: heroofages,
     rating: 5,
     tags: ["fantasy"],
   },
   {
-    title: "Mistborn: The Alloy of Law",
+    title: "The Alloy of Law",
     author: "Brandon Sanderson",
     cover: alloyoflaw,
     rating: 5,
     tags: ["fantasy"],
   },
   {
-  title: "Mistborn: Shadows of Self",
+  title: "Shadows of Self",
   author: "Brandon Sanderson",
   cover: shadowsofself,
   rating: 5,
   tags: ["fantasy"],
 },
 {
-  title: "Mistborn: The Bands of Mourning",
+  title: "The Bands of Mourning",
   author: "Brandon Sanderson",
   cover: bandsofmourning,
   rating: 5,
   tags: ["fantasy"],
 },
 {
-  title: "Mistborn: The Lost Metal",
+  title: "The Lost Metal",
   author: "Brandon Sanderson",
   cover: thelostmetal,
   rating: 5,
@@ -92,6 +95,27 @@ export const books: Book[] = [
   rating: 5,
   tags: ["horror"],
 },
+{
+  title: "Careless People",
+  author: "Sarah Wynn Williams",
+  cover: carelesspeople,
+  rating: 5,
+  tags: ["technology"],
+},
+{
+  title: "AlgoSpeak",
+  author: "Adam Aleksic",
+  cover: algospeak,
+  rating: 5,
+  tags: ["technology"],
+},
+{
+  title: "Men Who Hate Women",
+  author: "Laura Bates",
+  cover: menwhohatewomen,
+  rating: 5,
+  tags: ["thriller"],
+}
 ];
 
 export const films: Film[] = [
