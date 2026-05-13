@@ -53,6 +53,13 @@ export const books: Book[] = [
     rating: 5,
     tags: ["fantasy"],
   },
+  {
+  title: "Mistborn: Shadows of Self",
+  author: "Brandon Sanderson",
+  cover: shadowsofself,
+  rating: 5,
+  tags: ["fantasy"],
+},
 ];
 
 export const films: Film[] = [
