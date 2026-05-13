@@ -111,7 +111,7 @@ const { books, films } = Astro.props;
       btn.addEventListener('click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         const gridId = btn.getAttribute('aria-controls');
-        const grid = document.getElementById(gridId);
+        const grid = document.getElementById(gridId!);
         const arrow = btn.querySelector('.toggle-arrow');
         if (!grid || !arrow) return;
 
