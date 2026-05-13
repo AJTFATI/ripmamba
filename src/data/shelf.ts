@@ -8,6 +8,7 @@ import shadowsofself from "@/assets/posters/shadowsofself-mistborn5.jpg";
 import bandsofmourning from "@/assets/posters/bandsofmourning-mistborn6.jpg";
 import thelostmetal from "@/assets/posters/thelostmetal-mistborn7.jpg";
 import yesteryear from "@/assets/posters/yesteryear.jpg";
+import ringshout from "@/assets/posters/ringshout.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -83,6 +84,13 @@ export const books: Book[] = [
   cover: yesteryear,
   rating: 5,
   tags: ["fiction"],
+},
+{
+  title: "Ring Shout",
+  author: "P. Djèlí Clark",
+  cover: ringshout,
+  rating: 5,
+  tags: ["horror"],
 },
 ];
 
