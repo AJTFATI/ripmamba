@@ -5,7 +5,7 @@ import wellofascension from "@/assets/posters/wellofascension.jpg";
 import heroofages from "@/assets/posters/heroofages-mistborn3.jpg";
 import alloyoflaw from "@/assets/posters/alloyoflaw-mistborn4.jpg";
 import shadowsofself from "@/assets/posters/shadowsofself-mistborn5.jpg";
-import bandsofmourning from "@/assets"
+import bandsofmourning from "@/assets/posters/bandsofmourning-mistborn6.jpg";
 export type Book = {
   title: string;
   author: string;
