@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { books, films } = Astro.props;
-
 ---
 
 <section class="shelf">
@@ -24,10 +23,10 @@ const { books, films } = Astro.props;
                   <Image
                     src={film.poster}
                     alt={`Poster for ${film.title}`}
-                    width={120}
-                    height={180}
+                    width={240}
+                    height={360}
                     format="webp"
-                    quality={85}
+                    quality={90}
                     loading="lazy"
                     decoding="async"
                   />
@@ -36,10 +35,10 @@ const { books, films } = Astro.props;
                 <Image
                   src={film.poster}
                   alt={`Poster for ${film.title}`}
-                  width={120}
-                  height={180}
+                  width={240}
+                  height={360}
                   format="webp"
-                  quality={85}
+                  quality={90}
                   loading="lazy"
                   decoding="async"
                 />
@@ -47,7 +46,6 @@ const { books, films } = Astro.props;
             </div>
             <p class="item-title">{film.title}</p>
             <p class="item-sub">{film.year}</p>
-        
           </li>
         ))}
       </ul>
@@ -56,8 +54,18 @@ const { books, films } = Astro.props;
 
   {books.length > 0 && (
     <div class="shelf-section">
-      <h2 class="shelf-heading">Books</h2>
-      <ul class="shelf-grid" role="list">
+
+      <!-- CHANGED: h2 replaced with a button so it's clickable -->
+      <button
+        class="shelf-heading shelf-toggle"
+        aria-expanded="false"
+        aria-controls="books-grid"
+      >
+        Books <span class="toggle-arrow">▸</span>
+      </button>
+
+      <!-- CHANGED: id added, starts hidden -->
+      <ul class="shelf-grid" id="books-grid" role="list" style="display:none">
         {books.map(book => (
           <li class="shelf-item">
             <div class="cover">
@@ -66,10 +74,10 @@ const { books, films } = Astro.props;
                   <Image
                     src={book.cover}
                     alt={`Cover of ${book.title}`}
-                    width={120}
-                    height={180}
+                    width={240}
+                    height={360}
                     format="webp"
-                    quality={85}
+                    quality={90}
                     loading="lazy"
                     decoding="async"
                   />
@@ -78,10 +86,10 @@ const { books, films } = Astro.props;
                 <Image
                   src={book.cover}
                   alt={`Cover of ${book.title}`}
-                  width={120}
-                  height={180}
+                  width={240}
+                  height={360}
                   format="webp"
-                  quality={85}
+                  quality={90}
                   loading="lazy"
                   decoding="async"
                 />
@@ -89,13 +97,42 @@ const { books, films } = Astro.props;
             </div>
             <p class="item-title">{book.title}</p>
             <p class="item-sub">{book.author}</p>
-            
           </li>
         ))}
       </ul>
     </div>
   )}
 </section>
+
+<!-- ADDED: toggle script -->
+<script>
+  function initShelfToggle() {
+    document.querySelectorAll('.shelf-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const gridId = btn.getAttribute('aria-controls');
+        const grid = document.getElementById(gridId);
+        const arrow = btn.querySelector('.toggle-arrow');
+        if (!grid || !arrow) return;
+
+        // Flip the state
+        btn.setAttribute('aria-expanded', String(!expanded));
+
+        // Show or hide the grid
+        grid.style.display = expanded ? 'none' : 'grid';
+
+        // Rotate the arrow
+        arrow.textContent = expanded ? '▸' : '▾';
+      });
+    });
+  }
+
+  // Run on first load
+  initShelfToggle();
+
+  // Re-run after Astro page transitions (View Transitions API)
+  document.addEventListener('astro:page-load', initShelfToggle);
+</script>
 
 <style>
   .shelf { margin-block: 2rem; }
@@ -110,6 +147,26 @@ const { books, films } = Astro.props;
     color: var(--accent);
     margin-bottom: 1.25rem;
     text-align: center;
+  }
+
+  /* ADDED: button reset + pointer + flex centering */
+  .shelf-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    padding: 0;
+  }
+
+  /* ADDED: arrow styling */
+  .toggle-arrow {
+    font-size: 0.65rem;
+    color: var(--accent);
+    line-height: 1;
   }
 
   .shelf-grid {
