@@ -6,6 +6,8 @@ import heroofages from "@/assets/posters/heroofages-mistborn3.jpg";
 import alloyoflaw from "@/assets/posters/alloyoflaw-mistborn4.jpg";
 import shadowsofself from "@/assets/posters/shadowsofself-mistborn5.jpg";
 import bandsofmourning from "@/assets/posters/bandsofmourning-mistborn6.jpg";
+import thelostmetal from "@/assets/posters/thelostmetal-mistborn7.jpg";
+import yesteryear from "@/assets/posters/yesteryear.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -67,6 +69,20 @@ export const books: Book[] = [
   cover: bandsofmourning,
   rating: 5,
   tags: ["fantasy"],
+},
+{
+  title: "Mistborn: The Lost Metal",
+  author: "Brandon Sanderson",
+  cover: thelostmetal,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "Yesteryear",
+  author: "Cairo Claire Burke",
+  cover: yesteryear,
+  rating: 5,
+  tags: ["fiction"],
 },
 ];
 
