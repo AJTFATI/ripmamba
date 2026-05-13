@@ -12,6 +12,9 @@ import ringshout from "@/assets/posters/ringshout.jpg";
 import carelesspeople from "@/assets/posters/carelesspeople.jpg";
 import algospeak from "@/assets/posters/algospeak.jpg";
 import menwhohatewomen from "@/assets/posters/menwhohatewomen.jpg";
+import thebladeitself from "@/assets/posters/thebladeitself.jpg";
+import beforetheyarehanged from "@/assets/posters/beforetheyarehanged.jpg";
+import lastargumentofkings from "@/assets/posters/lastargumentofkings.jpg";  
 export type Book = {
   title: string;
   author: string;
@@ -115,6 +118,27 @@ export const books: Book[] = [
   cover: menwhohatewomen,
   rating: 5,
   tags: ["thriller"],
+},
+{
+  title: "The Blade Itself",
+  author: "Joe Abercrombie",
+  cover: thebladeitself,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "Before They Are Hanged",
+  author: "Joe Abercrombie",
+  cover: beforetheyarehanged,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "Last Argument of Kings",
+  author: "Joe Abercrombie",
+  cover: lastargumentofkings,
+  rating: 5,
+  tags: ["fantasy"],
 }
 ];
 
