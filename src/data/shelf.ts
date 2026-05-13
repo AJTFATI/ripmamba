@@ -5,6 +5,7 @@ import wellofascension from "@/assets/posters/wellofascension.jpg";
 import heroofages from "@/assets/posters/heroofages-mistborn3.jpg";
 import alloyoflaw from "@/assets/posters/alloyoflaw-mistborn4.jpg";
 import shadowsofself from "@/assets/posters/shadowsofself-mistborn5.jpg";
+import bandsofmourning from "@/assets"
 export type Book = {
   title: string;
   author: string;
@@ -57,6 +58,13 @@ export const books: Book[] = [
   title: "Mistborn: Shadows of Self",
   author: "Brandon Sanderson",
   cover: shadowsofself,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "Mistborn: The Bands of Mourning",
+  author: "Brandon Sanderson",
+  cover: bandsofmourning,
   rating: 5,
   tags: ["fantasy"],
 },
