@@ -2,7 +2,7 @@
 import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconArchive from "@/assets/icons/IconArchive.svg";
 import LinkButton from "./LinkButton.astro";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import avatar from "@/assets/images/bullterrier.png";
 import { SITE } from "@/config";
 
@@ -18,42 +18,15 @@ const isActive = (path: string) => {
 };
 ---
 
-  <a id="skip-to-content"
-  href="#main-content"
-  class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4"
->
-  Skip to content
-</a>
+<a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">Skip to content</a>
 
 <header class="app-layout flex flex-col items-center justify-between sm:flex-row">
-  <div
-    id="top-nav-wrap"
-    class:list={[
-      "py-4 sm:py-6",
-      "border-b border-border",
-      "relative w-full bg-background",
-      "flex items-baseline justify-between sm:items-center",
-    ]}
-  >
-    
-      href="/"
-      class="absolute py-1 whitespace-nowrap sm:static sm:my-auto"
-      aria-label={SITE.title}
-    >
+  <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border relative w-full bg-background flex items-baseline justify-between sm:items-center">
+    <a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto" aria-label={SITE.title}>
       <Image src={avatar} alt={SITE.title} width={80} height={80} class="h-20 w-auto" />
     </a>
-
-    <nav
-      id="nav-menu"
-      class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
-    >
-      <button
-        id="menu-btn"
-        class="focus-outline self-end p-2 sm:hidden"
-        aria-label="Open Menu"
-        aria-expanded="false"
-        aria-controls="menu-items"
-      >
+    <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0">
+      <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
         <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <path d="M18 6l-12 12" />
@@ -66,53 +39,20 @@ const isActive = (path: string) => {
           <path d="M4 18l16 0" />
         </svg>
       </button>
-
-      <ul
-        id="menu-items"
-        class:list={[
-          "mt-4 grid w-44 grid-cols-2 place-content-center gap-2",
-          "[&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium [&>li>a]:hover:text-accent sm:[&>li>a]:px-2 sm:[&>li>a]:py-1",
-          "hidden",
-          "sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0",
-        ]}
-      >
-        <li class="col-span-2">
-          <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>Posts</a>
-        </li>
-        <li class="col-span-2">
-          <a href="/shelf" class:list={{ "active-nav": isActive("/shelf") }}>Shelf</a>
-        </li>
-        <li class="col-span-2">
-          <a href="/about" class:list={{ "active-nav": isActive("/about") }}>About</a>
-        </li>
-        {
-          SITE.showArchives && (
-            <li class="col-span-2">
-              <LinkButton
-                href="/archives"
-                class:list={[
-                  "focus-outline flex justify-center p-3 sm:p-1",
-                  { "active-nav [&>svg]:stroke-accent": isActive("/archives") },
-                ]}
-                title="Archives"
-                aria-label="archives"
-              >
-                <IconArchive class="hidden sm:inline-block" />
-                <span class="sm:sr-only">Archives</span>
-              </LinkButton>
-            </li>
-          )
-        }
+      <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0 [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium [&>li>a]:hover:text-accent sm:[&>li>a]:px-2 sm:[&>li>a]:py-1">
+        <li class="col-span-2"><a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>Posts</a></li>
+        <li class="col-span-2"><a href="/shelf" class:list={{ "active-nav": isActive("/shelf") }}>Shelf</a></li>
+        <li class="col-span-2"><a href="/about" class:list={{ "active-nav": isActive("/about") }}>About</a></li>
+        {SITE.showArchives && (
+          <li class="col-span-2">
+            <LinkButton href="/archives" class:list={["focus-outline flex justify-center p-3 sm:p-1", { "active-nav [&>svg]:stroke-accent": isActive("/archives") }]} title="Archives" aria-label="archives">
+              <IconArchive class="hidden sm:inline-block" />
+              <span class="sm:sr-only">Archives</span>
+            </LinkButton>
+          </li>
+        )}
         <li class="col-span-1 flex items-center justify-center">
-          <LinkButton
-            href="/search"
-            class:list={[
-              "focus-outline flex p-3 sm:p-1",
-              { "[&>svg]:stroke-accent": isActive("/search") },
-            ]}
-            title="Search"
-            aria-label="search"
-          >
+          <LinkButton href="/search" class:list={["focus-outline flex p-3 sm:p-1", { "[&>svg]:stroke-accent": isActive("/search") }]} title="Search" aria-label="search">
             <IconSearch />
             <span class="sr-only">Search</span>
           </LinkButton>
@@ -128,9 +68,7 @@ const isActive = (path: string) => {
     const menuItems = document.querySelector("#menu-items");
     const menuIcon = document.querySelector("#menu-icon");
     const closeIcon = document.querySelector("#close-icon");
-
     if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
-
     menuBtn.addEventListener("click", () => {
       const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
       menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
@@ -140,7 +78,6 @@ const isActive = (path: string) => {
       closeIcon.classList.toggle("hidden");
     });
   }
-
   toggleNav();
   document.addEventListener("astro:after-swap", toggleNav);
 </script>
