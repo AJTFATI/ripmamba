@@ -16,6 +16,7 @@ import thebladeitself from "@/assets/posters/thebladeitself.jpg";
 import beforetheyarehanged from "@/assets/posters/beforetheyarehanged.jpg";
 import lastargumentofkings from "@/assets/posters/lastargumentofkings.jpg";  
 import bestservedcold from "@/assets/posters/bestservedcold.jpg";
+import theheroes from "@/assets/posters/theheroes.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -147,7 +148,14 @@ export const books: Book[] = [
   cover: bestservedcold,
   rating: 5,
   tags: ["fantasy"],
-}
+},
+{
+  title: "The Heroes",
+  author: "Joe Abercrombie",
+  cover: theheroes,
+  rating: 5,
+  tags: ["fantasy"],
+},
 ];
 
 export const films: Film[] = [
