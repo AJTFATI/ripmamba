@@ -106,6 +106,88 @@ const { books, films } = Astro.props;
 
 <!-- ADDED: toggle script -->
 <script>
+import { films } from "@/data/shelf";
+
+  function initShelfToggle() {
+    document.querySelectorAll('.shelf-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const gridId = btn.getAttribute('aria-controls');
+        const grid = document.getElementById(gridId!);
+        const arrow = btn.querySelector('.toggle-arrow');
+        if (!grid || !arrow) return;
+
+        // Flip the state
+        btn.setAttribute('aria-expanded', String(!expanded));
+
+        // Show or hide the grid
+        grid.style.display = expanded ? 'none' : 'grid';
+
+        // Rotate the arrow
+        arrow.textContent = expanded ? '▸' : '▾';
+      });
+    });
+  }
+
+  // Run on first load
+  initShelfToggle();
+
+  // Re-run after Astro page transitions (View Transitions API)
+  document.addEventListener('astro:page-load', initShelfToggle);
+    {films.length > 0 && (
+    <div class="shelf-section">
+
+      <!-- CHANGED: h2 replaced with a button so it's clickable -->
+      <button
+        class="shelf-heading shelf-toggle"
+        aria-expanded="false"
+        aria-controls="books-grid"
+      >
+        Books <span class="toggle-arrow">▸</span>
+      </button>
+
+      <!-- CHANGED: id added, starts hidden -->
+      <ul class="shelf-grid" id="books-grid" role="list" style="display:none">
+        {books.map(book => (
+          <li class="shelf-item">
+            <div class="cover">
+              {book.postSlug ? (
+                <a href={`/posts/${book.postSlug}/`} title={`Read my thoughts on ${book.title}`}>
+                  <Image
+                    src={book.cover}
+                    alt={`Cover of ${book.title}`}
+                    width={240}
+                    height={360}
+                    format="webp"
+                    quality={90}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                <Image
+                  src={book.cover}
+                  alt={`Cover of ${book.title}`}
+                  width={240}
+                  height={360}
+                  format="webp"
+                  quality={90}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <p class="item-title">{book.title}</p>
+            <p class="item-sub">{book.author}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</section>
+
+<!-- ADDED: toggle script -->
+<script>
   function initShelfToggle() {
     document.querySelectorAll('.shelf-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
