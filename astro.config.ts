@@ -15,7 +15,7 @@ export default defineConfig({
   site: SITE.website,
   trailingSlash: 'always',
   build: {
-    inlineStylesheets: "auto",
+    inlineStylesheets: "always",
   },
   integrations: [
     sitemap({
