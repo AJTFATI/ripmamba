@@ -17,6 +17,9 @@ import beforetheyarehanged from "@/assets/posters/beforetheyarehanged.jpg";
 import lastargumentofkings from "@/assets/posters/lastargumentofkings.jpg";  
 import bestservedcold from "@/assets/posters/bestservedcold.jpg";
 import theheroes from "@/assets/posters/theheroes.jpg";
+import redcountry from "@/assets/posters/redcountry.jpg";
+import thetroublewithpeace from "@/assets/posters/thetroublewithpeace.jpg"; 
+import wisdomofcrowds from "@/assets/posters/wisdomofcrowds.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -153,6 +156,27 @@ export const books: Book[] = [
   title: "The Heroes",
   author: "Joe Abercrombie",
   cover: theheroes,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "Red Country",
+  author: "Joe Abercrombie",
+  cover: redcountry,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "The Trouble with Peace",
+  author: "Joe Abercrombie",
+  cover: thetroublewithpeace,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "The Wisdom of Crowds",
+  author: "Joe Abercrombie",
+  cover: wisdomofcrowds,
   rating: 5,
   tags: ["fantasy"],
 },
