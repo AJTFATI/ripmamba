@@ -15,6 +15,7 @@ import menwhohatewomen from "@/assets/posters/menwhohatewomen.jpg";
 import thebladeitself from "@/assets/posters/thebladeitself.jpg";
 import beforetheyarehanged from "@/assets/posters/beforetheyarehanged.jpg";
 import lastargumentofkings from "@/assets/posters/lastargumentofkings.jpg";  
+import bestservedcold from "@/assets/posters/bestservedcold.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -137,6 +138,13 @@ export const books: Book[] = [
   title: "Last Argument of Kings",
   author: "Joe Abercrombie",
   cover: lastargumentofkings,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "Best Served Cold",
+  author: "Joe Abercrombie",
+  cover: bestservedcold,
   rating: 5,
   tags: ["fantasy"],
 }
