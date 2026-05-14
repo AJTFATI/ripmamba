@@ -11,7 +11,7 @@ const { books, films } = Astro.props;
 ---
 
 <section class="shelf">
-  {films.length > 0 && (
+  {books.length > 0 && (
     <div class="shelf-section">
       <button
         class="shelf-heading shelf-toggle"
@@ -58,7 +58,7 @@ const { books, films } = Astro.props;
     </div>
   )}
 
-  {books.length > 0 && (
+  {films.length > 0 && (
     <div class="shelf-section">
       <button
         class="shelf-heading shelf-toggle"
