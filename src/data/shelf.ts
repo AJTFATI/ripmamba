@@ -20,6 +20,11 @@ import theheroes from "@/assets/posters/theheroes.jpg";
 import redcountry from "@/assets/posters/redcountry.jpg";
 import thetroublewithpeace from "@/assets/posters/thetroublewithpeace.jpg"; 
 import wisdomofcrowds from "@/assets/posters/wisdomofcrowds.jpg";
+import skyward from "@/assets/posters/skyward.jpg";
+import starsight from "@/assets/posters/starsight.jpg";
+import cytonic from "@/assets/posters/cytonic.jpg";
+import defiant from "@/assets/posters/defiant.jpg";
+import warbreaker from "@/assets/posters/warbreaker.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -177,6 +182,42 @@ export const books: Book[] = [
   title: "The Wisdom of Crowds",
   author: "Joe Abercrombie",
   cover: wisdomofcrowds,
+  rating: 5,
+  tags: ["fantasy"],
+},
+{
+  title: "Skyward",
+  author: "Brandon Sanderson",
+  cover: skyward,
+  rating: 5,
+  tags: ["sci-fi"],
+},
+{
+  title: "Starsight",
+  author: "Brandon Sanderson",
+  cover: starsight,
+  rating: 5,
+  tags: ["sci-fi"],
+},
+{
+  title: "Cytonic",
+  author: "Brandon Sanderson",
+  cover: cytonic,
+  rating: 5,
+  tags: ["sci-fi"],
+},
+{
+  title: "Defiant",
+  author: "Brandon Sanderson",
+  cover: defiant,
+  rating: 5,
+  tags: ["sci-fi"],
+  
+},
+{
+  title: "Warbreaker",
+  author: "Brandon Sanderson",
+  cover: warbreaker,
   rating: 5,
   tags: ["fantasy"],
 },
