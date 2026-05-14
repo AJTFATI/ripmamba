@@ -16,53 +16,6 @@ const { books, films } = Astro.props;
       <button
         class="shelf-heading shelf-toggle"
         aria-expanded="false"
-        aria-controls="films-grid"
-      >
-        Movies &amp; TV <span class="toggle-arrow">▸</span>
-      </button>
-      <ul class="shelf-grid" id="films-grid" role="list" style="display:none">
-        {films.map(film => (
-          <li class="shelf-item">
-            <div class="cover">
-              {film.postSlug ? (
-                <a href={`/posts/${film.postSlug}/`} title={`Read my thoughts on ${film.title}`}>
-                  <Image
-                    src={film.poster}
-                    alt={`Poster for ${film.title}`}
-                    width={240}
-                    height={360}
-                    format="webp"
-                    quality={90}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
-              ) : (
-                <Image
-                  src={film.poster}
-                  alt={`Poster for ${film.title}`}
-                  width={240}
-                  height={360}
-                  format="webp"
-                  quality={90}
-                  loading="lazy"
-                  decoding="async"
-                />
-              )}
-            </div>
-            <p class="item-title">{film.title}</p>
-            <p class="item-sub">{film.year}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )}
-
-  {films.length > 0 && (
-    <div class="shelf-section">
-      <button
-        class="shelf-heading shelf-toggle"
-        aria-expanded="false"
         aria-controls="books-grid"
       >
         Books <span class="toggle-arrow">▸</span>
@@ -99,6 +52,53 @@ const { books, films } = Astro.props;
             </div>
             <p class="item-title">{book.title}</p>
             <p class="item-sub">{book.author}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {films.length > 0 && (
+    <div class="shelf-section">
+      <button
+        class="shelf-heading shelf-toggle"
+        aria-expanded="false"
+        aria-controls="films-grid"
+      >
+        Movies &amp; TV <span class="toggle-arrow">▸</span>
+      </button>
+      <ul class="shelf-grid" id="films-grid" role="list" style="display:none">
+        {films.map(film => (
+          <li class="shelf-item">
+            <div class="cover">
+              {film.postSlug ? (
+                <a href={`/posts/${film.postSlug}/`} title={`Read my thoughts on ${film.title}`}>
+                  <Image
+                    src={film.poster}
+                    alt={`Poster for ${film.title}`}
+                    width={240}
+                    height={360}
+                    format="webp"
+                    quality={90}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                <Image
+                  src={film.poster}
+                  alt={`Poster for ${film.title}`}
+                  width={240}
+                  height={360}
+                  format="webp"
+                  quality={90}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <p class="item-title">{film.title}</p>
+            <p class="item-sub">{film.year}</p>
           </li>
         ))}
       </ul>
