@@ -70,6 +70,10 @@ const filmsSorted = [...films].sort((a, b) => {
                   decoding="async"
                 />
               )}
+              <span class="status-label">completed</span>
+              {book.tags && book.tags.length > 0 && (
+                <span class="type-label">{book.tags[0]}</span>
+              )}
             </div>
             <p class="item-title">{book.title}</p>
             <p class="item-sub">{book.author}</p>
