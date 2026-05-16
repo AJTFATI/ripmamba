@@ -1,6 +1,5 @@
 import type { ImageMetadata } from "astro";
 import mistborn from "@/assets/posters/mistborn-thefinalempire.jpg";
-import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import wellofascension from "@/assets/posters/wellofascension.jpg";
 import heroofages from "@/assets/posters/heroofages-mistborn3.jpg";
 import alloyoflaw from "@/assets/posters/alloyoflaw-mistborn4.jpg";
@@ -25,6 +24,9 @@ import starsight from "@/assets/posters/starsight.jpg";
 import cytonic from "@/assets/posters/cytonic.jpg";
 import defiant from "@/assets/posters/defiant.jpg";
 import warbreaker from "@/assets/posters/warbreaker.jpg";
+import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
+import atlanta from "@/assets/posters/atlanta.jpg";
+import succession from "@/assets/posters/succession.jpg";
 export type Book = {
   title: string;
   author: string;
@@ -233,5 +235,23 @@ export const films: Film[] = [
     status: "watched",
     rating: 5,
     tags: ["drama"],
+  },
+  {
+    title: "Atlanta",
+    year: 2016,
+    poster: atlanta,
+    type: "film",
+    status: "watching",
+    rating: 5,
+    tags: ["comedy"],
+  },
+  {
+    title: "Succession",
+    year: 2023,
+    poster: succession,
+    type: "film",
+    status: "watching",
+    rating: 5,
+    tags: ["comedy"],
   },
 ];
