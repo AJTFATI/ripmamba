@@ -230,7 +230,7 @@ export const films: Film[] = [
     year: 2024,
     poster: theBookOfClarence,
     type: "film",
-    status: "watched"
+    status: "watched",
     rating: 5,
     tags: ["drama"],
   },
