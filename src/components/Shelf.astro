@@ -70,9 +70,8 @@ const filmsSorted = [...films].sort((a, b) => {
                   decoding="async"
                 />
               )}
-              <span class="status-label">completed</span>
               {book.tags && book.tags.length > 0 && (
-                <span class="type-label">{book.tags[0]}</span>
+                <span class="type-label" title={`Genre: ${book.tags[0]}`}>{book.tags[0]}</span>
               )}
             </div>
             <p class="item-title">{book.title}</p>
@@ -260,6 +259,22 @@ const filmsSorted = [...films].sort((a, b) => {
     border-radius: 2px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    cursor: help;
+  }
+
+  .type-label:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 4px;
+    padding: 4px 6px;
+    background: var(--accent);
+    color: var(--background);
+    font-size: 0.55rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    z-index: 10;
   }
 
   .item-title {
