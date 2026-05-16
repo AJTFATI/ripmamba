@@ -8,10 +8,26 @@ interface Props {
 }
 
 const { books, films } = Astro.props;
+
+// Sort books by author last name
+const booksSorted = [...books].sort((a, b) => {
+  const lastNameA = a.author.split(' ').pop() || a.author;
+  const lastNameB = b.author.split(' ').pop() || b.author;
+  return lastNameA.localeCompare(lastNameB);
+});
+
+// Separate films by status and sort alphabetically within each
+const watching = [...films]
+  .filter(f => f.status === 'watching')
+  .sort((a, b) => a.title.localeCompare(b.title));
+
+const watched = [...films]
+  .filter(f => f.status === 'watched')
+  .sort((a, b) => a.title.localeCompare(b.title));
 ---
 
 <section class="shelf">
-  {books.length > 0 && (
+  {booksSorted.length > 0 && (
     <div class="shelf-section">
       <button
         class="shelf-heading shelf-toggle"
@@ -21,7 +37,7 @@ const { books, films } = Astro.props;
         Books <span class="toggle-arrow">▸</span>
       </button>
       <ul class="shelf-grid" id="books-grid" role="list" style="display:none">
-        {books.map(book => (
+        {booksSorted.map(book => (
           <li class="shelf-item">
             <div class="cover">
               {book.postSlug ? (
@@ -58,17 +74,64 @@ const { books, films } = Astro.props;
     </div>
   )}
 
-  {films.length > 0 && (
+  {watching.length > 0 && (
     <div class="shelf-section">
       <button
         class="shelf-heading shelf-toggle"
         aria-expanded="false"
-        aria-controls="films-grid"
+        aria-controls="watching-grid"
       >
-        Movies &amp; TV <span class="toggle-arrow">▸</span>
+        Watching <span class="toggle-arrow">▸</span>
       </button>
-      <ul class="shelf-grid" id="films-grid" role="list" style="display:none">
-        {films.map(film => (
+      <ul class="shelf-grid" id="watching-grid" role="list" style="display:none">
+        {watching.map(film => (
+          <li class="shelf-item">
+            <div class="cover">
+              {film.postSlug ? (
+                <a href={`/posts/${film.postSlug}/`} title={`Read my thoughts on ${film.title}`}>
+                  <Image
+                    src={film.poster}
+                    alt={`Poster for ${film.title}`}
+                    width={240}
+                    height={360}
+                    format="webp"
+                    quality={90}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                <Image
+                  src={film.poster}
+                  alt={`Poster for ${film.title}`}
+                  width={240}
+                  height={360}
+                  format="webp"
+                  quality={90}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <p class="item-title">{film.title}</p>
+            <p class="item-sub">{film.year}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {watched.length > 0 && (
+    <div class="shelf-section">
+      <button
+        class="shelf-heading shelf-toggle"
+        aria-expanded="false"
+        aria-controls="watched-grid"
+      >
+        Watched <span class="toggle-arrow">▸</span>
+      </button>
+      <ul class="shelf-grid" id="watched-grid" role="list" style="display:none">
+        {watched.map(film => (
           <li class="shelf-item">
             <div class="cover">
               {film.postSlug ? (
