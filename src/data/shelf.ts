@@ -39,6 +39,7 @@ export type Film = {
   year: number;
   poster: ImageMetadata;
   type: "film" | "show";
+  status: "watching" | "watched";
   rating: 1 | 2 | 3 | 4 | 5;
   tags?: string[];
   postSlug?: string;
@@ -229,6 +230,7 @@ export const films: Film[] = [
     year: 2024,
     poster: theBookOfClarence,
     type: "film",
+    status: "watched"
     rating: 5,
     tags: ["drama"],
   },
