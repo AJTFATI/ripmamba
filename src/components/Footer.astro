@@ -17,11 +17,8 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 >
   <div class="my-2 flex flex-col items-center justify-center text-center sm:flex-row sm:text-left">
     <span>Copyright &#169; {currentYear}</span>
-    <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-    <span>All rights reserved.</span>
-  </div>
 
-  <div class="flex justify-center">
+  class="flex justify-center">
     <Socials />
   </div>
 </footer>
