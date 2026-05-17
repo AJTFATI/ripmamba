@@ -16,7 +16,6 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   {...attrs}
 >
   <div class="my-2 flex flex-col items-center justify-center text-center sm:flex-row sm:text-left">
-    <span>Copyright &#169; {currentYear}</span>
-    <Socials />
+    <span>Copyright &#169; {currentYear}</span> <Socials />
   </div>
 </footer>
