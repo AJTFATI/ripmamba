@@ -16,19 +16,24 @@ const booksSorted = [...books].sort((a, b) => {
   return lastNameA.localeCompare(lastNameB);
 });
 
-// Organize films by: status (watching first) → type (show first) → alphabetically
+// Organize films by: status (watching first) → mediaType (show first) → alphabetically
 const filmsSorted = [...films].sort((a, b) => {
-  // First by status: watching comes before watched
+  // First by status: watching comes before finished, finished before watched
+  const statusOrder = { 'watching': 0, 'finished': 1, 'watched': 2 };
   if (a.status !== b.status) {
-    return a.status === 'watching' ? -1 : 1;
+    return (statusOrder[a.status as keyof typeof statusOrder] || 2) - (statusOrder[b.status as keyof typeof statusOrder] || 2);
   }
-  // Then by type: show comes before film
-  if (a.type !== b.type) {
-    return a.type === 'show' ? -1 : 1;
+  // Then by mediaType: show comes before movie
+  if (a.mediaType !== b.mediaType) {
+    return a.mediaType === 'show' ? -1 : 1;
   }
   // Finally alphabetically by title
   return a.title.localeCompare(b.title);
 });
+
+// Separate shows and movies
+const shows = filmsSorted.filter(f => f.mediaType === 'show');
+const movies = filmsSorted.filter(f => f.mediaType === 'movie');
 ---
 
 <section class="shelf">
@@ -73,6 +78,9 @@ const filmsSorted = [...films].sort((a, b) => {
               {book.tags && book.tags.length > 0 && (
                 <span class="type-label">{book.tags[0]}</span>
               )}
+              {book.status === 'reading' && (
+                <span class="status-label">reading</span>
+              )}
             </div>
             <p class="item-title">{book.title}</p>
             <p class="item-sub">{book.author}</p>
@@ -82,54 +90,113 @@ const filmsSorted = [...films].sort((a, b) => {
     </div>
   )}
 
-  {filmsSorted.length > 0 && (
+  {(shows.length > 0 || movies.length > 0) && (
     <div class="shelf-section">
       <button
         class="shelf-heading shelf-toggle"
         aria-expanded="false"
-        aria-controls="films-grid"
+        aria-controls="media-grid"
       >
-        Films <span class="toggle-arrow">▸</span>
+        Media <span class="toggle-arrow">▸</span>
       </button>
-      <ul class="shelf-grid" id="films-grid" role="list" style="display:none">
-        {filmsSorted.map(film => (
-          <li class="shelf-item">
-            <div class="cover" data-status={film.status} data-type={film.type}>
-              {film.postSlug ? (
-                <a href={`/posts/${film.postSlug}/`} title={`Read my thoughts on ${film.title}`}>
-                  <Image
-                    src={film.poster}
-                    alt={`Poster for ${film.title}`}
-                    width={240}
-                    height={360}
-                    format="webp"
-                    quality={90}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
-              ) : (
-                <Image
-                  src={film.poster}
-                  alt={`Poster for ${film.title}`}
-                  width={240}
-                  height={360}
-                  format="webp"
-                  quality={90}
-                  loading="lazy"
-                  decoding="async"
-                />
-              )}
-              {film.status === 'watching' && (
-                <span class="status-label">watching</span>
-              )}
-              <span class="type-label">{film.type}</span>
-            </div>
-            <p class="item-title">{film.title}</p>
-            <p class="item-sub">{film.year}</p>
-          </li>
-        ))}
-      </ul>
+      
+      {shows.length > 0 && (
+        <div class="media-subsection">
+          <h3 class="media-subheading">TV Shows</h3>
+          <ul class="shelf-grid" id="shows-grid" role="list">
+            {shows.map(show => (
+              <li class="shelf-item">
+                <div class="cover" data-status={show.status} data-type={show.mediaType}>
+                  {show.postSlug ? (
+                    <a href={`/posts/${show.postSlug}/`} title={`Read my thoughts on ${show.title}`}>
+                      <Image
+                        src={show.poster}
+                        alt={`Poster for ${show.title}`}
+                        width={240}
+                        height={360}
+                        format="webp"
+                        quality={90}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
+                  ) : (
+                    <Image
+                      src={show.poster}
+                      alt={`Poster for ${show.title}`}
+                      width={240}
+                      height={360}
+                      format="webp"
+                      quality={90}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  {show.status === 'watching' && (
+                    <span class="status-label">watching</span>
+                  )}
+                  {show.status === 'reading' && (
+                    <span class="status-label">reading</span>
+                  )}
+                  <span class="type-label">{show.mediaType}</span>
+                </div>
+                <p class="item-title">{show.title}</p>
+                <p class="item-sub">{show.year}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {movies.length > 0 && (
+        <div class="media-subsection">
+          <h3 class="media-subheading">Movies</h3>
+          <ul class="shelf-grid" id="movies-grid" role="list">
+            {movies.map(movie => (
+              <li class="shelf-item">
+                <div class="cover" data-status={movie.status} data-type={movie.mediaType}>
+                  {movie.postSlug ? (
+                    <a href={`/posts/${movie.postSlug}/`} title={`Read my thoughts on ${movie.title}`}>
+                      <Image
+                        src={movie.poster}
+                        alt={`Poster for ${movie.title}`}
+                        width={240}
+                        height={360}
+                        format="webp"
+                        quality={90}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
+                  ) : (
+                    <Image
+                      src={movie.poster}
+                      alt={`Poster for ${movie.title}`}
+                      width={240}
+                      height={360}
+                      format="webp"
+                      quality={90}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  {movie.status === 'watching' && (
+                    <span class="status-label">watching</span>
+                  )}
+                  {movie.status === 'reading' && (
+                    <span class="status-label">reading</span>
+                  )}
+                  <span class="type-label">{movie.mediaType}</span>
+                </div>
+                <p class="item-title">{movie.title}</p>
+                <p class="item-sub">{movie.year}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <ul class="shelf-grid" id="media-grid" role="list" style="display:none"></ul>
     </div>
   )}
 </section>
@@ -142,10 +209,20 @@ const filmsSorted = [...films].sort((a, b) => {
         const gridId = btn.getAttribute('aria-controls');
         const grid = document.getElementById(gridId!);
         const arrow = btn.querySelector('.toggle-arrow');
+        const subsections = btn.nextElementSibling?.parentElement?.querySelectorAll('.media-subsection');
+        
         if (!grid || !arrow) return;
 
         btn.setAttribute('aria-expanded', String(!expanded));
         grid.style.display = expanded ? 'none' : 'grid';
+        
+        // Show/hide media subsections when toggling Media section
+        if (subsections) {
+          subsections.forEach(subsection => {
+            (subsection as HTMLElement).style.display = expanded ? 'none' : 'block';
+          });
+        }
+        
         arrow.textContent = expanded ? '▸' : '▾';
       });
     });
@@ -174,18 +251,34 @@ const filmsSorted = [...films].sort((a, b) => {
     background: none;
     border: none;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
     width: 100%;
     padding: 0;
+    margin: 0 auto;
   }
 
   .toggle-arrow {
     font-size: 0.65rem;
     color: var(--accent);
     line-height: 1;
+  }
+
+  .media-subsection {
+    margin-bottom: 2rem;
+  }
+
+  .media-subheading {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-top: 0;
   }
 
   .shelf-grid {
@@ -272,6 +365,7 @@ const filmsSorted = [...films].sort((a, b) => {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    padding: 0 0.25rem;
   }
 
   .item-sub {
