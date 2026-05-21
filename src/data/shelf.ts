@@ -24,8 +24,10 @@ import starsight from "@/assets/posters/starsight.jpg";
 import cytonic from "@/assets/posters/cytonic.jpg";
 import defiant from "@/assets/posters/defiant.jpg";
 import warbreaker from "@/assets/posters/warbreaker.jpg";
+import tenderistheflesh from "@/assets/posters/tenderistheflesh.jpg"; 
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
+import widowsbay from "@/assets/posters/widowsbay.jpg";
 import succession from "@/assets/posters/succession.jpg";
 export type Book = {
   title: string;
@@ -224,6 +226,13 @@ export const books: Book[] = [
   rating: 5,
   tags: ["fantasy"],
 },
+{
+  title: "The Tender is the Flesh",
+  author: "Agustina Bazterrica",
+  cover: tenderistheflesh,
+  rating: 5,
+  tags: ["horror"],
+}
 ];
 
 export const films: Film[] = [
@@ -244,6 +253,15 @@ export const films: Film[] = [
     status: "watching",
     rating: 5,
     tags: ["comedy"],
+  },
+  {
+    title: "Widow's Bay",
+    year: 2026,
+    poster: widowsbay,
+    type: "film",
+    status: "watching",
+    rating: 5,
+    tags: ["comedy, horror"],
   },
   {
     title: "Succession",
