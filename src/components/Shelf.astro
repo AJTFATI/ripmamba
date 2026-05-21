@@ -9,31 +9,20 @@ interface Props {
 
 const { books, films } = Astro.props;
 
-// Sort books by author last name
 const booksSorted = [...books].sort((a, b) => {
   const lastNameA = a.author.split(' ').pop() || a.author;
   const lastNameB = b.author.split(' ').pop() || b.author;
   return lastNameA.localeCompare(lastNameB);
 });
 
-// Organize films by: status (watching first) → mediaType (show first) → alphabetically
+// watching first, then watched/finished, then alphabetically
 const filmsSorted = [...films].sort((a, b) => {
-  // First by status: watching comes before finished, finished before watched
-  const statusOrder = { 'watching': 0, 'finished': 1, 'watched': 2 };
-  if (a.status !== b.status) {
-    return (statusOrder[a.status as keyof typeof statusOrder] || 2) - (statusOrder[b.status as keyof typeof statusOrder] || 2);
-  }
-  // Then by mediaType: show comes before movie
-  if (a.mediaType !== b.mediaType) {
-    return a.mediaType === 'show' ? -1 : 1;
-  }
-  // Finally alphabetically by title
+  const statusOrder = { 'watching': 0, 'watched': 1, 'finished': 1 };
+  const aOrder = statusOrder[a.status as keyof typeof statusOrder] ?? 1;
+  const bOrder = statusOrder[b.status as keyof typeof statusOrder] ?? 1;
+  if (aOrder !== bOrder) return aOrder - bOrder;
   return a.title.localeCompare(b.title);
 });
-
-// Separate shows and movies
-const shows = filmsSorted.filter(f => f.mediaType === 'show');
-const movies = filmsSorted.filter(f => f.mediaType === 'movie');
 ---
 
 <section class="shelf">
@@ -81,6 +70,9 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
               {book.status === 'reading' && (
                 <span class="status-label">reading</span>
               )}
+              {book.status === 'finished' && (
+                <span class="status-label">read</span>
+              )}
             </div>
             <p class="item-title">{book.title}</p>
             <p class="item-sub">{book.author}</p>
@@ -90,7 +82,7 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
     </div>
   )}
 
-  {(shows.length > 0 || movies.length > 0) && (
+  {filmsSorted.length > 0 && (
     <div class="shelf-section">
       <button
         class="shelf-heading shelf-toggle"
@@ -99,104 +91,47 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
       >
         Media <span class="toggle-arrow">▸</span>
       </button>
-      
-      {shows.length > 0 && (
-        <div class="media-subsection">
-          <h3 class="media-subheading">TV Shows</h3>
-          <ul class="shelf-grid" id="shows-grid" role="list">
-            {shows.map(show => (
-              <li class="shelf-item">
-                <div class="cover" data-status={show.status} data-type={show.mediaType}>
-                  {show.postSlug ? (
-                    <a href={`/posts/${show.postSlug}/`} title={`Read my thoughts on ${show.title}`}>
-                      <Image
-                        src={show.poster}
-                        alt={`Poster for ${show.title}`}
-                        width={240}
-                        height={360}
-                        format="webp"
-                        quality={90}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
-                  ) : (
-                    <Image
-                      src={show.poster}
-                      alt={`Poster for ${show.title}`}
-                      width={240}
-                      height={360}
-                      format="webp"
-                      quality={90}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  )}
-                  {show.status === 'watching' && (
-                    <span class="status-label">watching</span>
-                  )}
-                  {show.status === 'watched' && (
-                    <span class="status-label">watched</span>
-                  )}
-                  <span class="type-label">{show.mediaType}</span>
-                </div>
-                <p class="item-title">{show.title}</p>
-                <p class="item-sub">{show.year}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {movies.length > 0 && (
-        <div class="media-subsection">
-          <h3 class="media-subheading">Movies</h3>
-          <ul class="shelf-grid" id="movies-grid" role="list">
-            {movies.map(movie => (
-              <li class="shelf-item">
-                <div class="cover" data-status={movie.status} data-type={movie.mediaType}>
-                  {movie.postSlug ? (
-                    <a href={`/posts/${movie.postSlug}/`} title={`Read my thoughts on ${movie.title}`}>
-                      <Image
-                        src={movie.poster}
-                        alt={`Poster for ${movie.title}`}
-                        width={240}
-                        height={360}
-                        format="webp"
-                        quality={90}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
-                  ) : (
-                    <Image
-                      src={movie.poster}
-                      alt={`Poster for ${movie.title}`}
-                      width={240}
-                      height={360}
-                      format="webp"
-                      quality={90}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  )}
-                  {movie.status === 'watching' && (
-                    <span class="status-label">watching</span>
-                  )}
-                  {movie.status === 'watched' && (
-                    <span class="status-label">watched</span>
-                  )}
-                  <span class="type-label">{movie.mediaType}</span>
-                </div>
-                <p class="item-title">{movie.title}</p>
-                <p class="item-sub">{movie.year}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <ul class="shelf-grid" id="media-grid" role="list" style="display:none"></ul>
+      <ul class="shelf-grid" id="media-grid" role="list" style="display:none">
+        {filmsSorted.map(film => (
+          <li class="shelf-item">
+            <div class="cover">
+              {film.postSlug ? (
+                <a href={`/posts/${film.postSlug}/`} title={`Read my thoughts on ${film.title}`}>
+                  <Image
+                    src={film.poster}
+                    alt={`Poster for ${film.title}`}
+                    width={240}
+                    height={360}
+                    format="webp"
+                    quality={90}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                <Image
+                  src={film.poster}
+                  alt={`Poster for ${film.title}`}
+                  width={240}
+                  height={360}
+                  format="webp"
+                  quality={90}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              {(film.status === 'watching') && (
+                <span class="status-label">watching</span>
+              )}
+              {(film.status === 'watched' || film.status === 'finished') && (
+                <span class="status-label">watched</span>
+              )}
+            </div>
+            <p class="item-title">{film.title}</p>
+            <p class="item-sub">{film.year}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   )}
 </section>
@@ -209,20 +144,11 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
         const gridId = btn.getAttribute('aria-controls');
         const grid = document.getElementById(gridId!);
         const arrow = btn.querySelector('.toggle-arrow');
-        const subsections = btn.nextElementSibling?.parentElement?.querySelectorAll('.media-subsection');
-        
+
         if (!grid || !arrow) return;
 
         btn.setAttribute('aria-expanded', String(!expanded));
         grid.style.display = expanded ? 'none' : 'grid';
-        
-        // Show/hide media subsections when toggling Media section
-        if (subsections) {
-          subsections.forEach(subsection => {
-            (subsection as HTMLElement).style.display = expanded ? 'none' : 'block';
-          });
-        }
-        
         arrow.textContent = expanded ? '▸' : '▾';
       });
     });
@@ -266,24 +192,9 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
     line-height: 1;
   }
 
-  .media-subsection {
-    margin-bottom: 2rem;
-  }
-
-  .media-subheading {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    text-align: center;
-    margin-top: 0;
-  }
-
   .shelf-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 1.25rem;
     list-style: none;
     padding: 0;
@@ -299,8 +210,8 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
 
   .cover {
     position: relative;
-    width: 120px;
-    height: 180px;
+    width: 100%;
+    aspect-ratio: 2 / 3;
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid var(--border);
