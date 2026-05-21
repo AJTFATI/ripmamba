@@ -135,8 +135,8 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
                   {show.status === 'watching' && (
                     <span class="status-label">watching</span>
                   )}
-                  {show.status === 'reading' && (
-                    <span class="status-label">reading</span>
+                  {show.status === 'watched' && (
+                    <span class="status-label">watched</span>
                   )}
                   <span class="type-label">{show.mediaType}</span>
                 </div>
@@ -183,8 +183,8 @@ const movies = filmsSorted.filter(f => f.mediaType === 'movie');
                   {movie.status === 'watching' && (
                     <span class="status-label">watching</span>
                   )}
-                  {movie.status === 'reading' && (
-                    <span class="status-label">reading</span>
+                  {movie.status === 'watched' && (
+                    <span class="status-label">watched</span>
                   )}
                   <span class="type-label">{movie.mediaType}</span>
                 </div>
