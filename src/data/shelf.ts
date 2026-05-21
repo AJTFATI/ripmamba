@@ -59,7 +59,6 @@ export const books: Book[] = [
     cover: mistborn,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Well of Ascension",
