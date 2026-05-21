@@ -25,6 +25,7 @@ import cytonic from "@/assets/posters/cytonic.jpg";
 import defiant from "@/assets/posters/defiant.jpg";
 import warbreaker from "@/assets/posters/warbreaker.jpg";
 import tenderistheflesh from "@/assets/posters/tenderistheflesh.jpg"; 
+import thedevils from "@/assets/posters/thedevils.jpg"; 
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
 import widowsbay from "@/assets/posters/widowsbay.jpg";
@@ -232,7 +233,15 @@ export const books: Book[] = [
   cover: tenderistheflesh,
   rating: 5,
   tags: ["horror"],
-}
+},
+{
+  title: "The Devils",
+  author: "Joe Abercrombie",
+  cover: thedevils,
+  rating: 5,
+  tags: ["fantasy"],
+},
+
 ];
 
 export const films: Film[] = [
