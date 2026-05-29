@@ -30,6 +30,7 @@ import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
 import widowsbay from "@/assets/posters/widowsbay.jpg";
 import succession from "@/assets/posters/succession.jpg";
+import vinlandsaga from "@/assets/posters/vinlandsaga.jpg"; 
 
 export type Book = {
   title: string;
@@ -307,4 +308,13 @@ export const films: Film[] = [
     rating: 5,
     tags: ["drama"],
   },
+  {
+    title: "Vinland Saga",
+    year: 2024,
+    poster: vinlandsaga,
+    mediaType: "show",
+    status: "watching",
+    rating: 5,
+    tags: ["anime", "historical"],
+  }
 ];
