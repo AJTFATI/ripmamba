@@ -67,7 +67,6 @@ export const books: Book[] = [
     cover: wellofascension,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Hero of Ages",
@@ -75,7 +74,6 @@ export const books: Book[] = [
     cover: heroofages,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Alloy of Law",
@@ -83,7 +81,6 @@ export const books: Book[] = [
     cover: alloyoflaw,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "Shadows of Self",
@@ -91,7 +88,6 @@ export const books: Book[] = [
     cover: shadowsofself,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Bands of Mourning",
@@ -99,7 +95,6 @@ export const books: Book[] = [
     cover: bandsofmourning,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Lost Metal",
@@ -107,7 +102,6 @@ export const books: Book[] = [
     cover: thelostmetal,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "Yesteryear",
@@ -115,7 +109,6 @@ export const books: Book[] = [
     cover: yesteryear,
     rating: 5,
     tags: ["fiction"],
-    status: "finished",
   },
   {
     title: "Ring Shout",
@@ -123,7 +116,6 @@ export const books: Book[] = [
     cover: ringshout,
     rating: 5,
     tags: ["horror"],
-    status: "finished",
   },
   {
     title: "Careless People",
@@ -131,7 +123,6 @@ export const books: Book[] = [
     cover: carelesspeople,
     rating: 5,
     tags: ["technology"],
-    status: "finished",
   },
   {
     title: "AlgoSpeak",
@@ -139,7 +130,6 @@ export const books: Book[] = [
     cover: algospeak,
     rating: 5,
     tags: ["technology"],
-    status: "finished",
   },
   {
     title: "Men Who Hate Women",
@@ -147,7 +137,6 @@ export const books: Book[] = [
     cover: menwhohatewomen,
     rating: 5,
     tags: ["thriller"],
-    status: "finished",
   },
   {
     title: "The Blade Itself",
@@ -155,7 +144,6 @@ export const books: Book[] = [
     cover: thebladeitself,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "Before They Are Hanged",
@@ -163,7 +151,6 @@ export const books: Book[] = [
     cover: beforetheyarehanged,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "Last Argument of Kings",
@@ -171,7 +158,6 @@ export const books: Book[] = [
     cover: lastargumentofkings,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "Best Served Cold",
@@ -179,7 +165,6 @@ export const books: Book[] = [
     cover: bestservedcold,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Heroes",
@@ -187,7 +172,6 @@ export const books: Book[] = [
     cover: theheroes,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "Red Country",
@@ -203,7 +187,6 @@ export const books: Book[] = [
     cover: thetroublewithpeace,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Wisdom of Crowds",
@@ -211,7 +194,6 @@ export const books: Book[] = [
     cover: wisdomofcrowds,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "Skyward",
@@ -219,7 +201,6 @@ export const books: Book[] = [
     cover: skyward,
     rating: 5,
     tags: ["sci-fi"],
-    status: "finished",
   },
   {
     title: "Starsight",
@@ -227,7 +208,6 @@ export const books: Book[] = [
     cover: starsight,
     rating: 5,
     tags: ["sci-fi"],
-    status: "finished",
   },
   {
     title: "Cytonic",
@@ -235,7 +215,6 @@ export const books: Book[] = [
     cover: cytonic,
     rating: 5,
     tags: ["sci-fi"],
-    status: "finished",
   },
   {
     title: "Defiant",
@@ -243,7 +222,6 @@ export const books: Book[] = [
     cover: defiant,
     rating: 5,
     tags: ["sci-fi"],
-    status: "finished",
   },
   {
     title: "Warbreaker",
@@ -251,7 +229,6 @@ export const books: Book[] = [
     cover: warbreaker,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Tender is the Flesh",
@@ -259,7 +236,6 @@ export const books: Book[] = [
     cover: tenderistheflesh,
     rating: 5,
     tags: ["horror"],
-    status: "finished",
   },
   {
     title: "The Devils",
@@ -267,7 +243,6 @@ export const books: Book[] = [
     cover: thedevils,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
 ];
 
@@ -304,7 +279,7 @@ export const films: Film[] = [
     year: 2023,
     poster: succession,
     mediaType: "show",
-    status: "finished",
+    status: "watching",
     rating: 5,
     tags: ["drama"],
   },
