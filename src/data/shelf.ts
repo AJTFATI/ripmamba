@@ -181,7 +181,6 @@ export const books: Book[] = [
     cover: redcountry,
     rating: 5,
     tags: ["fantasy"],
-    status: "finished",
   },
   {
     title: "The Trouble with Peace",
@@ -308,7 +307,7 @@ export const films: Film[] = [
   },
   {
     title: "Vinland Saga",
-    year: 2024,
+    year: 2019,
     poster: vinlandsaga,
     mediaType: "show",
     status: "watching",
