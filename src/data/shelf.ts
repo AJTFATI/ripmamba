@@ -27,7 +27,7 @@ import warbreaker from "@/assets/posters/warbreaker.jpg";
 import tenderistheflesh from "@/assets/posters/tenderistheflesh.jpg"; 
 import thedevils from "@/assets/posters/thedevils.jpg"; 
 import halfaking from "@/assets/posters/halfaking.jpg";
-import halftheworld from "@/assets/posters/halfaworld.jpg";
+import halftheworld from "@/assets/posters/halftheworld.jpg";
 import halfawar from "@/assets/posters/halfawar.jpg";
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
@@ -205,7 +205,7 @@ export const books: Book[] = [
     tags: ["fantasy"],
   },
   {
-    title: "Half a World",
+    title: "Half the World",
     author: "Joe Abercrombie",
     cover: halftheworld,
     rating: 5,
