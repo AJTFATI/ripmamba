@@ -26,12 +26,14 @@ import defiant from "@/assets/posters/defiant.jpg";
 import warbreaker from "@/assets/posters/warbreaker.jpg";
 import tenderistheflesh from "@/assets/posters/tenderistheflesh.jpg"; 
 import thedevils from "@/assets/posters/thedevils.jpg"; 
+import halfaking from "@/assets/posters/halfaking.jpg";
+import halfaworld from "@/assets/posters/halfaworld.jpg";
+import halfawar from "@/assets/posters/halfawar.jpg";
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
 import widowsbay from "@/assets/posters/widowsbay.jpg";
 import succession from "@/assets/posters/succession.jpg";
 import vinlandsaga from "@/assets/posters/vinlandsaga.jpg"; 
-
 export type Book = {
   title: string;
   author: string;
@@ -192,6 +194,27 @@ export const books: Book[] = [
     title: "The Wisdom of Crowds",
     author: "Joe Abercrombie",
     cover: wisdomofcrowds,
+    rating: 5,
+    tags: ["fantasy"],
+  },
+  {
+    title: "Half a King",
+    author: "Joe Abercrombie",
+    cover: halfaking,
+    rating: 5,
+    tags: ["fantasy"],
+  },
+  {
+    title: "Half a World",
+    author: "Joe Abercrombie",
+    cover: halfaworld,
+    rating: 5,
+    tags: ["fantasy"],
+  },
+  {
+    title: "Half a War",
+    author: "Joe Abercrombie",
+    cover: halfawar,
     rating: 5,
     tags: ["fantasy"],
   },
