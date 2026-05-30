@@ -201,7 +201,34 @@ const filmsSorted = [...films].sort((a, b) => {
   margin: 0;
 }
 
-@media (max-width: 768x) {
+.item-title {
+  font-size: 0.65rem;
+  font-weight: 500;
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+  line-height: 1.3;
+  color: var(--foreground);
+  width: 100%;
+  height: 2.6em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding: 0 0.1rem;
+}
+
+.item-sub {
+  font-size: 0.6rem;
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+  margin: 0.15rem 0 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.1rem;
+}
+
+@media (max-width: 768px) {
   .shelf-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
@@ -209,7 +236,7 @@ const filmsSorted = [...films].sort((a, b) => {
 
   .item-title,
   .item-sub {
-    display: none;
+    display: none !important;
   }
 }
 
