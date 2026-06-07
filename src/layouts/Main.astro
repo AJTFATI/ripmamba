@@ -28,7 +28,7 @@ const backUrl = SITE.showBackButton ? Astro.url.pathname : "/";
   <p class="mt-2 mb-6 italic">{props.pageDesc}</p>
   <slot />
 </main>
-
+<Breadcrumb lastSegmentLabel={"titleTransition" in props ? props.pageTitle[1] : undefined} />
 <script>
   document.addEventListener("astro:page-load", () => {
     const mainContent: HTMLElement | null =
