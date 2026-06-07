@@ -1,7 +1,6 @@
-git ---
 title: Tailwind Typography Plugin
 author: Sat Naing
-pubDatetime: 2022-07-05T02:05:51Z
+pubDatetime: 2022-07-05T16:55:12.000+00:00
 featured: false
 draft: false
 tags:
