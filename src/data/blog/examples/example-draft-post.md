@@ -6,7 +6,7 @@ slug: example-draft-post
 featured: false
 draft: true
 tags:
-  - TypeScript
+  - Testing
   - Astro
 description:
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
