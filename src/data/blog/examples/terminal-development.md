@@ -1,7 +1,7 @@
 ---
 title: Blog Post Template
 author: Alexander J. Taylor
-pubDatetime: 2022-06-09T03:42:51Z (Publish Day)
+pubDatetime: 2000-1-11
 slug: short-and-sweet
 featured: false
 draft: false
