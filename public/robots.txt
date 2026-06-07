@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /private
+User-agent: Googlebot-Image
+Disallow: /src/assets/posters
 
 # Sitemaps
 Sitemap: https://ripmamba.pages.dev
