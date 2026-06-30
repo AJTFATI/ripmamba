@@ -41,6 +41,7 @@ export type Book = {
   rating: 1 | 2 | 3 | 4 | 5;
   tags?: string[];
   postSlug?: string;
+  blurb?: string;
   status?: "reading" | "finished";
 };
 
@@ -53,6 +54,7 @@ export type Film = {
   rating: 1 | 2 | 3 | 4 | 5;
   tags?: string[];
   postSlug?: string;
+  blurb?: string;
 };
 
 export const books: Book[] = [
