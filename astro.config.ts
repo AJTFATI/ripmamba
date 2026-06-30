@@ -1,6 +1,7 @@
 import { defineConfig, envField, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import {
@@ -13,7 +14,7 @@ import { SITE } from "./src/config";
 
 export default defineConfig({
   site: SITE.website,
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
   build: {
     inlineStylesheets: "always",
   },
@@ -23,7 +24,9 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+    processor: unified({
+      remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+    }),
     shikiConfig: {
       themes: { light: "min-light", dark: "night-owl" },
       defaultColor: false,
@@ -36,7 +39,6 @@ export default defineConfig({
       ],
     },
   },
-  experimental: {
   fonts: [
     {
       provider: fontProviders.google(),
@@ -48,13 +50,12 @@ export default defineConfig({
       display: "swap",
     },
   ],
-},
-vite: {
-  plugins: [tailwindcss()],
-  optimizeDeps: {
-    exclude: ["@resvg/resvg-js"],
+  vite: {
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ["@resvg/resvg-js"],
+    },
   },
-},
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
