@@ -55,10 +55,12 @@ const filmsSorted = [...films].sort((a, b) => {
               <p class="item-sub">{book.author}</p>
             </button>
             <div class="item-detail">
-              <p>{book.blurb ?? 'No notes yet.'}</p>
-              {book.postSlug && (
-                <a href={`/posts/${book.postSlug}/`}>Full thoughts →</a>
-              )}
+              <div class="item-detail-inner">
+                <p>{book.blurb ?? 'No notes yet.'}</p>
+                {book.postSlug && (
+                  <a href={`/posts/${book.postSlug}/`}>Full thoughts →</a>
+                )}
+              </div>
             </div>
           </li>
         ))}
@@ -95,10 +97,12 @@ const filmsSorted = [...films].sort((a, b) => {
               <p class="item-sub">{film.year}</p>
             </button>
             <div class="item-detail">
-              <p>{film.blurb ?? 'No notes yet.'}</p>
-              {film.postSlug && (
-                <a href={`/posts/${film.postSlug}/`}>Full thoughts →</a>
-              )}
+              <div class="item-detail-inner">
+                <p>{film.blurb ?? 'No notes yet.'}</p>
+                {film.postSlug && (
+                  <a href={`/posts/${film.postSlug}/`}>Full thoughts →</a>
+                )}
+              </div>
             </div>
           </li>
         ))}
@@ -261,24 +265,38 @@ const filmsSorted = [...films].sort((a, b) => {
 
   .item-detail {
     grid-column: 1 / -1;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.25s ease;
-    font-size: 0.78rem;
-    line-height: 1.55;
-    padding: 0 0.25rem;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
     text-align: center;
   }
 
   .item-detail.open {
-    max-height: 240px;
-    opacity: 1;
+    grid-template-rows: 1fr;
+  }
+
+  .item-detail-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .item-detail.open .item-detail-inner {
     padding: 0.75rem 0.25rem 0.25rem;
   }
 
-  .item-detail p { margin: 0 0 0.5rem; color: var(--foreground); }
-  .item-detail a { font-size: 0.75rem; font-weight: 500; color: var(--accent); }
+  .item-detail-inner p {
+    margin: 0 auto 0.5rem;
+    color: var(--foreground);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .item-detail-inner a {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
 
   @media (max-width: 768px) {
     .shelf-grid {
