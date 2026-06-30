@@ -32,8 +32,8 @@ import halfawar from "@/assets/posters/halfawar.jpg";
 import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
 import widowsbay from "@/assets/posters/widowsbay.jpg";
-import succession from "@/assets/posters/succession.jpg";
-import vinlandsaga from "@/assets/posters/vinlandsaga.jpg"; 
+import awizardofearthsea from "@/assets/posters/awizardofearthsea.jpg";
+
 export type Book = {
   title: string;
   author: string;
@@ -266,6 +266,13 @@ export const books: Book[] = [
     rating: 5,
     tags: ["fantasy"],
   },
+  {
+    title: "A Wizard of Earthsea",
+    author: "Ursula K. Le Guin",
+    cover: awizardofearthsea,
+    rating: 5,
+    tags: ["fantasy"]
+  }
 ];
 
 export const films: Film[] = [
@@ -283,7 +290,7 @@ export const films: Film[] = [
     year: 2016,
     poster: atlanta,
     mediaType: "show",
-    status: "watching",
+    status: "watched",
     rating: 5,
     tags: ["comedy"],
   },
@@ -292,26 +299,9 @@ export const films: Film[] = [
     year: 2026,
     poster: widowsbay,
     mediaType: "movie",
-    status: "watching",
+    status: "watched",
     rating: 5,
-    tags: ["comedy, horror"],
+    tags: ["comedy", "horror"],
   },
-  {
-    title: "Succession",
-    year: 2023,
-    poster: succession,
-    mediaType: "show",
-    status: "watching",
-    rating: 5,
-    tags: ["drama"],
-  },
-  {
-    title: "Vinland Saga",
-    year: 2019,
-    poster: vinlandsaga,
-    mediaType: "show",
-    status: "watching",
-    rating: 5,
-    tags: ["anime", "historical"],
-  }
+  
 ];
