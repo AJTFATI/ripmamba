@@ -273,6 +273,7 @@ export const books: Book[] = [
     author: "Ursula K. Le Guin",
     cover: awizardofearthsea,
     rating: 5,
+    blurb: "I wanted to read more classic epic fantasy.",
     tags: ["fantasy"]
   }
 ];
