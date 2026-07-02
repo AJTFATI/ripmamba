@@ -33,7 +33,7 @@ import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
 import widowsbay from "@/assets/posters/widowsbay.jpg";
 import awizardofearthsea from "@/assets/posters/awizardofearthsea.jpg";
-import doppleganger from "@/assets/posters/doppleganger.jpg";
+import doppelganger from "@/assets/posters/doppleganger.jpg";
 
 export type Book = {
   title: string;
@@ -278,9 +278,9 @@ export const books: Book[] = [
     tags: ["fantasy"]
   },
   {
-    title: "Doppleganger",
+    title: "Doppelganger",
     author: "Naomi Klein",
-    cover: doppleganger,
+    cover: doppelganger,
     rating: 5,
     blurb: "As someone with a common name.. wow. Very interesting to see how some lines aren't as blurred as we think.",
     tags: ["tech"]
