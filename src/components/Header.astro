@@ -23,8 +23,14 @@ const isActive = (path: string) => {
 <header class="app-layout flex flex-col items-center justify-between sm:flex-row">
   <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border relative w-full bg-background flex items-baseline justify-between sm:items-center">
     <a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto" aria-label={SITE.title}>
-      <Image src={avatar} alt={SITE.title} width={80} height={80} class="h-20 w-auto" />
-    </a>
+      <Image src={avatar} alt={SITE.title}  src="url"
+  width={0}
+  height={0}
+  sizes="100vw"
+  style={{ width: '100%', height: 'auto' }} />
+    </a>//
+
+
     <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0">
       <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
         <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
