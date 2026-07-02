@@ -33,7 +33,7 @@ import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
 import widowsbay from "@/assets/posters/widowsbay.jpg";
 import awizardofearthsea from "@/assets/posters/awizardofearthsea.jpg";
-import doppelganger from "@/assets/posters/doppleganger.jpg";
+import doppelganger from "@/assets/posters/doppelganger.jpg";
 
 export type Book = {
   title: string;
