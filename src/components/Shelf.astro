@@ -109,10 +109,15 @@ const filmsSorted = [...films].sort((a, b) => {
       </ul>
     </div>
   )}
+
+  <div class="shelf-backdrop" id="shelf-backdrop" aria-hidden="true"></div>
 </section>
 
 <script>
   function initShelf() {
+    const shelf = document.querySelector('.shelf');
+    const backdrop = document.getElementById('shelf-backdrop');
+
     document.querySelectorAll('.shelf-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -125,26 +130,44 @@ const filmsSorted = [...films].sort((a, b) => {
       });
     });
 
+    function closeActive() {
+      document.querySelectorAll('.shelf-item.active').forEach(li => {
+        li.classList.remove('active');
+        li.querySelector('.item-toggle')?.setAttribute('aria-expanded', 'false');
+        li.querySelector('.item-detail')?.classList.remove('open');
+      });
+      shelf?.classList.remove('spotlight-open');
+      document.body.classList.remove('shelf-lock');
+    }
+
+    function openItem(li: Element) {
+      closeActive();
+      li.classList.add('active');
+      li.querySelector('.item-toggle')?.setAttribute('aria-expanded', 'true');
+      li.querySelector('.item-detail')?.classList.add('open');
+      shelf?.classList.add('spotlight-open');
+      document.body.classList.add('shelf-lock');
+    }
+
     document.querySelectorAll('.item-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        const detail = btn.nextElementSibling as HTMLElement | null;
-        if (!detail) return;
-
-        // close any other open item in the same grid
-        const grid = btn.closest('.shelf-grid');
-        if (grid) {
-          grid.querySelectorAll('.item-toggle[aria-expanded="true"]').forEach(otherBtn => {
-            if (otherBtn === btn) return;
-            otherBtn.setAttribute('aria-expanded', 'false');
-            const otherDetail = otherBtn.nextElementSibling as HTMLElement | null;
-            otherDetail?.classList.remove('open');
-          });
-        }
-
-        btn.setAttribute('aria-expanded', String(!expanded));
-        detail.classList.toggle('open', !expanded);
+        const li = btn.closest('.shelf-item');
+        if (!li) return;
+        li.classList.contains('active') ? closeActive() : openItem(li);
       });
+    });
+
+    // tap outside the card (anywhere in the transparent full-screen layer) closes it
+    document.querySelectorAll('.item-detail').forEach(detail => {
+      detail.addEventListener('click', (e) => {
+        if (e.target === detail) closeActive();
+      });
+    });
+
+    backdrop?.addEventListener('click', closeActive);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeActive();
     });
   }
 
@@ -191,7 +214,15 @@ const filmsSorted = [...films].sort((a, b) => {
     align-items: start;
   }
 
-  .shelf-item { display: flex; flex-direction: column; }
+  .shelf-item {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* spotlight: raise the active item above the dimmed backdrop */
+  .shelf-item.active { z-index: 50; }
 
   .item-toggle {
     background: none;
@@ -204,6 +235,11 @@ const filmsSorted = [...films].sort((a, b) => {
     align-items: center;
     text-align: center;
     width: 100%;
+    transition: transform 0.25s ease;
+  }
+
+  .shelf-item.active .item-toggle {
+    transform: scale(1.12);
   }
 
   .item-title {
@@ -240,11 +276,16 @@ const filmsSorted = [...films].sort((a, b) => {
     overflow: hidden;
     border: 1px solid var(--border);
     background-color: color-mix(in srgb, var(--muted) 25%, var(--background));
-    transition: opacity 0.15s;
+    transition: opacity 0.15s, box-shadow 0.25s ease;
   }
 
   .item-toggle:active .cover,
   .item-toggle:hover .cover { opacity: 0.85; }
+
+  .shelf-item.active .cover {
+    opacity: 1;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  }
 
   .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -263,37 +304,71 @@ const filmsSorted = [...films].sort((a, b) => {
   .status-label { top: 4px; left: 4px; }
   .type-label { bottom: 4px; right: 4px; }
 
+  /* dims + blurs everything while a book is spotlighted */
+  .shelf-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+    z-index: 40;
+  }
+
+  .shelf.spotlight-open .shelf-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* blurb: fixed, full-viewport, centers its card regardless of grid position */
   .item-detail {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease;
-    text-align: center;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
   }
 
   .item-detail.open {
-    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .item-detail-inner {
-    overflow: hidden;
-    min-height: 0;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 420px;
+    padding: 1.25rem 1.25rem 1.1rem;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    transform: scale(0.94);
+    transition: transform 0.25s ease;
   }
 
   .item-detail.open .item-detail-inner {
-    padding: 0.75rem 0.25rem 0.25rem;
+    transform: scale(1);
   }
 
   .item-detail-inner p {
-    margin: 0 auto 0.5rem;
+    margin: 0 0 0.6rem;
     color: var(--foreground);
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     line-height: 1.6;
-    max-width: 480px;
   }
 
   .item-detail-inner a {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: var(--accent);
   }
@@ -305,5 +380,14 @@ const filmsSorted = [...films].sort((a, b) => {
     }
     .item-title { font-size: 0.62rem; }
     .item-sub { display: none; }
+    .shelf-item.active .item-toggle { transform: scale(1.08); }
+  }
+</style>
+
+<style is:global>
+  /* locks background scroll while a book is spotlighted, so the sheet
+     doesn't scroll behind the modal on mobile */
+  body.shelf-lock {
+    overflow: hidden;
   }
 </style>
