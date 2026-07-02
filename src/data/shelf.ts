@@ -33,6 +33,7 @@ import theBookOfClarence from "@/assets/posters/thebookofclarence.jpg";
 import atlanta from "@/assets/posters/atlanta.jpg";
 import widowsbay from "@/assets/posters/widowsbay.jpg";
 import awizardofearthsea from "@/assets/posters/awizardofearthsea.jpg";
+import doppleganger from "@/assets/posters/doppleganger.jpg";
 
 export type Book = {
   title: string;
@@ -273,8 +274,16 @@ export const books: Book[] = [
     author: "Ursula K. Le Guin",
     cover: awizardofearthsea,
     rating: 5,
-    blurb: "I wanted to read more classic epic fantasy.",
+    blurb: "The first work I read from Ursula K. Le Guin was her short story Why Are Americans Afraid of Dragons? I am ready to read more of her work.",
     tags: ["fantasy"]
+  },
+  {
+    title: "Doppleganger",
+    author: "Naomi Klein",
+    cover: doppleganger,
+    rating: 5,
+    blurb: "As someone with a common name.. wow. Very interesting to see how some lines aren't as blurred as we think.",
+    tags: ["tech"]
   }
 ];
 
