@@ -23,12 +23,13 @@ const isActive = (path: string) => {
 <header class="app-layout flex flex-col items-center justify-between sm:flex-row">
   <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border relative w-full bg-background flex items-baseline justify-between sm:items-center">
     <a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto" aria-label={SITE.title}>
-      <Image src={avatar} alt={SITE.title}  
-  width={0}
-  height={0}
-  sizes="100vw"
-  style={{ width: '100%', height: 'auto' }} />
-    </a>//
+     <Image
+  src={avatar}
+  alt={SITE.title}
+  width={40}
+  height={40}
+  class="rounded-full object-cover"
+/>
 
 
     <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0">
