@@ -5,7 +5,7 @@ export const SITE = {
   title: "Alexander J. Taylor",
   author: "Alexander J. Taylor",
   profile: "https://ripmamba.pages.dev/",
-  ogImage: "src/assets/images/Headshot-AlexanderJTaylor.jpg",
+  ogImage: "src/assets/images/Headshot-AlexanderJTaylor23.jpeg",
   lightAndDarkMode: false,
   postPerIndex: 4,
   postPerPage: 4,
