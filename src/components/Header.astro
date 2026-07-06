@@ -2,8 +2,6 @@
 import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconArchive from "@/assets/icons/IconArchive.svg";
 import LinkButton from "./LinkButton.astro";
-import { Image } from "astro:assets";
-import avatar from "@/assets/images/Headshot-AlexanderJTaylor23.jpeg";
 import { SITE } from "@/config";
 
 const { pathname } = Astro.url;
@@ -23,13 +21,8 @@ const isActive = (path: string) => {
 <header class="app-layout flex flex-col items-center justify-between sm:flex-row">
   <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border relative w-full bg-background flex items-baseline justify-between sm:items-center">
 <a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto" aria-label={SITE.title}>
-  <Image
-    src={avatar}
-    alt={SITE.title}
-    width={40}
-    height={40}
-    class="rounded-full object-cover object-[center_10%]"
-  />
+<a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto" aria-label={SITE.title}>
+  <span id="live-date" class="font-app text-sm text-foreground/80"></span>
 </a>
 
 
@@ -85,7 +78,21 @@ const isActive = (path: string) => {
       menuIcon.classList.toggle("hidden");
       closeIcon.classList.toggle("hidden");
     });
+    
   }
   toggleNav();
   document.addEventListener("astro:after-swap", toggleNav);
+</script>
+<script>
+  function renderDate() {
+    const el = document.getElementById("live-date");
+    if (!el) return;
+    el.textContent = new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).format(new Date());
+  }
+  renderDate();
+  document.addEventListener("astro:after-swap", renderDate);
 </script>
