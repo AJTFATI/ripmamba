@@ -23,6 +23,10 @@ const isActive = (path: string) => {
 <a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto" aria-label={SITE.title}>
   <span id="live-date" class="font-app text-sm text-foreground/80"></span>
 </a>
+<a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto flex items-center gap-1.5" aria-label={SITE.title}>
+  <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+  <span id="live-date" class="font-app text-sm text-accent"></span>
+</a>
 
 
     <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0">
