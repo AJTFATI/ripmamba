@@ -1,0 +1,80 @@
+media:
+  input: src/data/blog
+  output: /src/data/blog
+
+content:
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: src/data/blog
+    filename: "{fields.title|slugify}.md"
+    view:
+      fields: [title, pubDatetime, draft, featured]
+    fields:
+      - name: title
+        label: Title
+        type: string
+
+      - name: description
+        label: Description
+        type: text
+
+      - name: author
+        label: Author
+        type: string
+        default: "Alexander J. Taylor"
+
+      - name: pubDatetime
+        label: Publish Date
+        type: date
+        options:
+          format: "yyyy-MM-dd'T'HH:mm:ss'Z'"
+          time: true
+
+      - name: modDatetime
+        label: Last Modified Date
+        type: date
+        required: false
+        options:
+          format: "yyyy-MM-dd'T'HH:mm:ss'Z'"
+          time: true
+
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+        default: ["others"]
+
+      - name: ogImage
+        label: OG Image
+        type: image
+        required: false
+
+      - name: canonicalURL
+        label: Canonical URL
+        type: string
+        required: false
+
+      - name: hideEditPost
+        label: Hide "Edit post" Link
+        type: boolean
+        required: false
+
+      - name: timezone
+        label: Timezone (IANA)
+        type: string
+        required: false
+
+      - name: body
+        label: Content
+        type: rich-text
