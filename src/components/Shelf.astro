@@ -56,6 +56,7 @@ const filmsSorted = [...films].sort((a, b) => {
             </button>
             <div class="item-detail">
               <div class="item-detail-inner">
+                <button type="button" class="detail-close" aria-label="Close">×</button>
                 <p>{book.blurb ?? 'No notes yet.'}</p>
                 {book.postSlug && (
                   <a href={`/posts/${book.postSlug}/`}>Full thoughts →</a>
@@ -98,6 +99,7 @@ const filmsSorted = [...films].sort((a, b) => {
             </button>
             <div class="item-detail">
               <div class="item-detail-inner">
+                <button type="button" class="detail-close" aria-label="Close">×</button>
                 <p>{film.blurb ?? 'No notes yet.'}</p>
                 {film.postSlug && (
                   <a href={`/posts/${film.postSlug}/`}>Full thoughts →</a>
@@ -197,6 +199,14 @@ const filmsSorted = [...films].sort((a, b) => {
     document.querySelectorAll('.item-detail').forEach(detail => {
       detail.addEventListener('click', (e) => {
         if (e.target === detail) closeActive();
+      });
+    });
+
+    // explicit close button, so closing isn't a guessing game
+    document.querySelectorAll('.detail-close').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeActive();
       });
     });
 
@@ -384,10 +394,12 @@ const filmsSorted = [...films].sort((a, b) => {
   .item-detail-inner {
     position: fixed;
     width: min(420px, calc(100vw - 1.5rem));
+    max-height: min(70vh, 480px);
+    overflow-y: auto;
     background: var(--background);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 1.1rem 1.2rem 1rem;
+    padding: 2.4rem 1.4rem 1.2rem;
     text-align: center;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     transform: scale(0.94);
@@ -399,16 +411,35 @@ const filmsSorted = [...films].sort((a, b) => {
   }
 
   .item-detail-inner p {
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.8rem;
     color: var(--foreground);
-    font-size: 0.85rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
   }
 
   .item-detail-inner a {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--accent);
+  }
+
+  .detail-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--foreground);
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
