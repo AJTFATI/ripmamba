@@ -57,7 +57,9 @@ const filmsSorted = [...films].sort((a, b) => {
             <div class="item-detail">
               <div class="item-detail-inner">
                 <button type="button" class="detail-close" aria-label="Close">×</button>
-                <p>{book.blurb ?? 'No notes yet.'}</p>
+                {(book.blurb ?? 'No notes yet.').split(/\n\s*\n/).map(para => (
+                  <p>{para}</p>
+                ))}
                 {book.postSlug && (
                   <a href={`/posts/${book.postSlug}/`}>Full thoughts →</a>
                 )}
@@ -100,7 +102,9 @@ const filmsSorted = [...films].sort((a, b) => {
             <div class="item-detail">
               <div class="item-detail-inner">
                 <button type="button" class="detail-close" aria-label="Close">×</button>
-                <p>{film.blurb ?? 'No notes yet.'}</p>
+                {(film.blurb ?? 'No notes yet.').split(/\n\s*\n/).map(para => (
+                  <p>{para}</p>
+                ))}
                 {film.postSlug && (
                   <a href={`/posts/${film.postSlug}/`}>Full thoughts →</a>
                 )}
@@ -281,7 +285,8 @@ const filmsSorted = [...films].sort((a, b) => {
     align-items: center;
     text-align: center;
     width: 100%;
-    transition: transform 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-tap-highlight-color: transparent;
   }
 
   .shelf-item.active .item-toggle {
@@ -365,7 +370,7 @@ const filmsSorted = [...films].sort((a, b) => {
     -webkit-backdrop-filter: blur(6px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.3s ease-out;
     z-index: 40;
   }
 
@@ -382,7 +387,7 @@ const filmsSorted = [...films].sort((a, b) => {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.25s ease-out;
   }
 
   .item-detail.open {
@@ -396,25 +401,33 @@ const filmsSorted = [...films].sort((a, b) => {
     width: min(420px, calc(100vw - 1.5rem));
     max-height: min(70vh, 480px);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     background: var(--background);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 2.4rem 1.4rem 1.2rem;
     text-align: center;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    transform: scale(0.94);
-    transition: transform 0.25s ease;
+    transform: scale(0.94) translateZ(0);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
   }
 
   .item-detail.open .item-detail-inner {
-    transform: scale(1);
+    transform: scale(1) translateZ(0);
   }
 
   .item-detail-inner p {
-    margin: 0 0 0.8rem;
+    margin: 0 0 0.9rem;
     color: var(--foreground);
     font-size: 1rem;
     line-height: 1.7;
+  }
+
+  .item-detail-inner p:last-of-type {
+    margin-bottom: 0.8rem;
   }
 
   .item-detail-inner a {
@@ -440,6 +453,12 @@ const filmsSorted = [...films].sort((a, b) => {
     border-radius: 50%;
     cursor: pointer;
     z-index: 1;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.15s ease;
+  }
+
+  .detail-close:active {
+    opacity: 0.6;
   }
 
   @media (max-width: 768px) {
