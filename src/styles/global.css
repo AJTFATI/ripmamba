@@ -57,7 +57,30 @@ h3, h4 {
 }
 
 .active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+  @apply underline decoration-dashed decoration-2 underline-offset-8;
+}
+
+/* Sharp, dashed border treatment (mirrors madcampos.dev's style) */
+.dash-border {
+  border-width: 2px;
+  border-style: dashed;
+  border-radius: 0;
+  border-color: var(--color-accent);
+}
+
+.nav-pill {
+  @apply inline-flex items-center gap-1.5 px-3 py-1.5 text-sm;
+  border-width: 2px;
+  border-style: dashed;
+  border-radius: 0;
+  border-color: var(--color-border);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-pill:hover,
+.nav-pill.active-pill {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 :target {

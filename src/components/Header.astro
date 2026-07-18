@@ -1,6 +1,9 @@
 ---
 import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconArchive from "@/assets/icons/IconArchive.svg";
+import IconEdit from "@/assets/icons/IconEdit.svg";
+import IconBook from "@/assets/icons/IconBook.svg";
+import IconUser from "@/assets/icons/IconUser.svg";
 import LinkButton from "./LinkButton.astro";
 import { SITE } from "@/config";
 
@@ -19,14 +22,14 @@ const isActive = (path: string) => {
 <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">Skip to content</a>
 
 <header class="app-layout flex flex-col items-center justify-between sm:flex-row">
-  <div id="top-nav-wrap" class="py-4 sm:py-6 border-b border-border relative w-full bg-background flex items-baseline justify-between sm:items-center">
+  <div id="top-nav-wrap" class="py-4 sm:py-6 border-b-2 border-dashed border-border relative w-full bg-background flex items-baseline justify-between sm:items-center">
 <a href="/" class="absolute py-1 whitespace-nowrap sm:static sm:my-auto flex items-center" aria-label={SITE.title}>
   <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
   <span id="live-date" class="font-app text-sm text-accent ml-3"></span>
 </a>
 
 
-    <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0">
+    <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-3 sm:py-0">
       <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
         <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -40,22 +43,37 @@ const isActive = (path: string) => {
           <path d="M4 18l16 0" />
         </svg>
       </button>
-      <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0 [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium [&>li>a]:hover:text-accent sm:[&>li>a]:px-2 sm:[&>li>a]:py-1">
-        <li class="col-span-2"><a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>Posts</a></li>
-        <li class="col-span-2"><a href="/shelf" class:list={{ "active-nav": isActive("/shelf") }}>Shelf</a></li>
-        <li class="col-span-2"><a href="/about" class:list={{ "active-nav": isActive("/about") }}>About</a></li>
+      <ul id="menu-items" class="mt-4 flex w-full flex-col items-center gap-2 hidden sm:mt-0 sm:flex sm:w-auto sm:flex-row sm:gap-2">
+        <li>
+          <a href="/posts" class:list={["nav-pill", { "active-pill": isActive("/posts") }]}>
+            <IconEdit class="h-4 w-4" />
+            Posts
+          </a>
+        </li>
+        <li>
+          <a href="/shelf" class:list={["nav-pill", { "active-pill": isActive("/shelf") }]}>
+            <IconBook class="h-4 w-4" />
+            Shelf
+          </a>
+        </li>
+        <li>
+          <a href="/about" class:list={["nav-pill", { "active-pill": isActive("/about") }]}>
+            <IconUser class="h-4 w-4" />
+            About
+          </a>
+        </li>
         {SITE.showArchives && (
-          <li class="col-span-2">
-            <LinkButton href="/archives" class:list={["focus-outline flex justify-center p-3 sm:p-1", { "active-nav [&>svg]:stroke-accent": isActive("/archives") }]} title="Archives" aria-label="archives">
-              <IconArchive class="hidden sm:inline-block" />
-              <span class="sm:sr-only">Archives</span>
+          <li>
+            <LinkButton href="/archives" class:list={["nav-pill", { "active-pill": isActive("/archives") }]} title="Archives" aria-label="archives">
+              <IconArchive class="h-4 w-4" />
+              Archives
             </LinkButton>
           </li>
         )}
-        <li class="col-span-1 flex items-center justify-center">
-          <LinkButton href="/search" class:list={["focus-outline flex p-3 sm:p-1", { "[&>svg]:stroke-accent": isActive("/search") }]} title="Search" aria-label="search">
-            <IconSearch />
-            <span class="sr-only">Search</span>
+        <li>
+          <LinkButton href="/search" class:list={["nav-pill", { "active-pill": isActive("/search") }]} title="Search" aria-label="search">
+            <IconSearch class="h-4 w-4" />
+            Search
           </LinkButton>
         </li>
       </ul>
