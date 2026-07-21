@@ -1,126 +1,101 @@
 ---
-import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import Socials from "@/components/Socials.astro";
-import LinkButton from "@/components/LinkButton.astro";
-import Card from "@/components/Card.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
-import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
-import IconEdit from "@/assets/icons/IconEdit.svg";
-import IconUser from "@/assets/icons/IconUser.svg";
-import headshot from "@/assets/images/Headshot-AlexanderJTaylor23.jpeg";
-import { SITE } from "@/config";
-import { SOCIALS } from "@/constants";
-
-const posts = await getCollection("blog");
-
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 ---
-
-<Layout>
-  <Header />
-  <main id="main-content" data-layout="index" class="app-layout">
-    <section id="hero" class:list={["pt-8 pb-6", "border-b-2 border-dashed border-border"]}>
-      <div class="flex flex-col items-center gap-6 text-center">
-        <Image
-          src={headshot}
-          alt="Photo of Alexander J. Taylor"
-          width={280}
-          height={280}
-          class="dash-border h-40 w-40 rounded-full object-cover sm:h-56 sm:w-56"
-        />
-
-        <div class="w-full">
-          <h1 class="my-2 inline-block text-4xl font-bold sm:text-5xl">
-            Hi, I'm Alexander.
-          </h1>
-          <p>
-            
-          </p>
-
-          <nav aria-label="Quick links" class="mt-4">
-            <ul class="flex flex-wrap justify-center gap-2">
-              <li>
-                <a href="/posts/" class="nav-pill">
-                  <IconEdit class="h-4 w-4" />
-                  My Blog
-                </a>
-              </li>
-              <li>
-                <a href="/about/" class="nav-pill">
-                  <IconUser class="h-4 w-4" />
-                  About Me
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          {
-            // only display if at least one social link is enabled
-            SOCIALS.length > 0 && (
-              <div class="mt-4 flex flex-col items-center">
-                <Socials />
-              </div>
-            )
-          }
-        </div>
-      </div>
-    </section>
-
-    {
-      featuredPosts.length > 0 && (
-        <section
-          id="featured"
-          class:list={[
-            "pt-12 pb-6",
-            { "border-b border-border": recentPosts.length > 0 },
-          ]}
-        >
-          <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-          <ul>
-            {featuredPosts.map(data => (
-              <Card variant="h3" {...data} />
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
-            )}
-          </ul>
-        </section>
-      )
-    }
-
-    <div class="my-8 text-center">
-      <LinkButton href="/posts/" class="nav-pill">
-        All Posts
-        <IconArrowRight class="inline-block h-4 w-4 rtl:-rotate-180" />
-      </LinkButton>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>To the Bay, with love.</title>
+  </head>
+  <body>
+    <div class="video-wrap">
+      <video autoplay muted loop playsinline class="bg-blur">
+        <source src="/videos/Jul20-Zhills.mp4" type="video/mp4">
+      </video>
+      <video autoplay muted loop playsinline class="fg-sharp" id="main-video">
+        <source src="/videos/Jul20-Zhills.mp4" type="video/mp4">
+      </video>
     </div>
-  </main>
-  <Footer />
-</Layout>
+
+    <button id="sound-toggle">🔇</button>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-wrap {
+    position: fixed;
+    inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0 */
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+  }
+
+  .bg-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(30px) brightness(0.6);
+    transform: scale(1.1);
+  }
+
+.fg-sharp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(1.25); /* ← tweak this */
+  object-fit: cover; /* ← changed from contain */
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+}
+  #sound-toggle {
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  #sound-toggle:active {
+    background: rgba(0,0,0,0.8);
+  }
+</style>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset?.layout;
-    if (indexLayout) {
-      sessionStorage.setItem("backUrl", "/");
-    }
+  const mainVideo = document.getElementById('main-video') as HTMLVideoElement;
+  const btn = document.getElementById('sound-toggle') as HTMLButtonElement;
+
+  btn.addEventListener('click', () => {
+    mainVideo.muted = !mainVideo.muted;
+    btn.textContent = mainVideo.muted ? '🔇' : '🔊';
   });
 </script>
